@@ -1,0 +1,6 @@
+%section
+  %h2 portfolio
+  
+  %article#gallery{ :"data-images" => Dir.glob("#{APP_PATH}/public/imgs/home/*.png").sort.map{|img| "/imgs/home/#{File.basename img}"}.to_json }
+  
+  %p asduashduahsduahsda
