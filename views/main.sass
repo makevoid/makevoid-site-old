@@ -1,8 +1,8 @@
 // @import "buttons"
 @mixin rounded($border)
-  -webkit-border-radius= $border
-  -moz-border-radius= $border
-  border-radius= $border
+  -webkit-border-radius: $border
+  -moz-border-radius: $border
+  border-radius: $border
 
 @mixin shadow
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2)
@@ -10,9 +10,9 @@
   box-shadow: 0 1px 2px rgba(0,0,0,.2)
 
 @mixin gradient($top, $bottom)
-  background-color= $bottom
-  background= -webkit-gradient(linear, left top, left bottom, from($top), to($bottom))
-  background= -moz-linear-gradient(top, $top,  $bottom)
+  background-color: $bottom
+  background: -webkit-gradient(linear, left top, left bottom, from($top), to($bottom))
+  background: -moz-linear-gradient(top, $top,  $bottom)
   filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$top}', endColorstr='#{$bottom}')
 
 @mixin button
@@ -37,12 +37,12 @@
 @mixin color($background)
   border: solid 1px darken($background, 3%)
   @include gradient(lighten($background, 13%), $background)
-  color= mix(#fff, $background, 90%)
+  color: mix(#fff, $background, 90%)
   &:hover
     @include gradient(lighten($background, 10%), darken($background, 5%))
   &:active
     @include gradient($background, lighten($background, 10%))
-    color= mix(#fff, $background, 70%)
+    color: mix(#fff, $background, 70%)
 
 button,
 input[type="reset"],
@@ -134,12 +134,12 @@ a
   
 // style
 
-$bg: #DDD
+$bg: #055081
 $bg_cont: #FFF
-$txt: #222
+$txt: #EEE
 $main: #999
 $alt: #666
-$links: #444
+$links: #CEFFFD
 
 @font-face
   font-family: Guardian
@@ -166,15 +166,16 @@ input[type='submit'], input.submit, a.button
   +color($main)
 
 #container
-  width: 85%
+  width: 100%
   margin: 0 auto 40px 
-  padding-top: 30px
+  padding-top: 20px
+  +simple_gradient(#1F2B36, $bg)
   
 p 
   font-size: 0.9em
   
 h1 
-  margin-bottom: 25px
+  margin-bottom: 10px
   font-size: 2em
   span
     font-size: 0.55em
@@ -185,6 +186,12 @@ h2
 =transition($params)    
   -webkit-transition: $params
   -moz-transition: $params
+  -o-transition: $params
+  
+=transform($params)    
+  -webkit-transform: $params
+  -moz-transform: $params
+  -o-transform: $params
   
 =transition2($params, $params2)    
   -webkit-transition: $params, $params2
@@ -198,22 +205,69 @@ h2
 #gallery
   margin: 0 auto
   position: relative
+  overflow: hidden
   img 
     width: 400px
     height: 300px
     position: absolute
-    //+transition2(opacity 0.5s ease-in-out, left 1s ease-in-out)
-    +transition(0.5s ease-in-out)
-    opacity: 1
+    //transition2(opacity 0.5s ease-in-out, left 1s ease-in-out)
+    +transition(all 0.5s ease-in-out)
+    opacity: 0.85
     cursor: pointer
-    top: 80px
     z-index: 1
+  img.mkHidden
+    opacity: 0
+  img:hover
+    -webkit-transform: scale3d(1.1)
+    opacity: 1
+
+=mkButton
+  background: #888
+  +transition(all 0.1s ease-in-out)
+  opacity: 0
+  position: absolute
+  font-weight: bold
+  font-size: 1.4em
+  cursor: pointer
+  z-index: 15    
+
+#gallery
+  .mkButton
+    +mkButton
+    top: 0px
+    width: 50px
+    height: 450px
+    padding: 200px 0 0 
+  .mkButton.active
+    opacity: 0.1
+  .mkButton.active:hover
+    opacity: 0.7
+  .mkButtonGo
+    +mkButton
+    top: 350px
+    width: 300px
+    height: 100px
+    padding: 25px 0 0
+    +border-radius-top(30px)
+  .mkButtonGo.active
+    opacity: 0.3
+  .mkButtonGo.active:hover
+    opacity: 0.7
   //
     img.center
       width: 600px
       height: 400px
       top: 0
       z-index: 2
-  img:hover
-    opacity: 0.8
+      
+    img:hover
+      opacity: 0.8
+
+
+#gallery
+  margin-bottom: 25px
   
+#infos
+  ul.features
+    li
+      display: block

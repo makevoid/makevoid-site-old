@@ -7,7 +7,7 @@ enable :sessions
 path = File.expand_path "../", __FILE__
 APP_PATH = path
 
-class App < Sinatra::Base
+class Makevoid < Sinatra::Base
   require "#{APP_PATH}/config/env"
   
   set :haml, { :format => :html5 }
@@ -20,6 +20,12 @@ class App < Sinatra::Base
 
   def not_found(object=nil)
     halt 404, "404 - Page Not Found"
+  end
+  
+  helpers do
+    def js_void
+      "javascript:void(0)"
+    end
   end
 
   get "/" do
