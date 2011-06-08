@@ -1,7 +1,7 @@
-%section
+%section.portfolio
   %h2 portfolio
   
-  %article#gallery{ :"data-images" => Dir.glob("#{APP_PATH}/public/imgs/home/*.png").sort.map{|img| "/imgs/home/#{File.basename img}"}.to_json }
+  %div#gallery{ :"data-images" => Dir.glob("#{APP_PATH}/public/imgs/home/*.png").sort.map{|img| "/imgs/home/#{File.basename img}"}.to_json }
     .btn_next.mkButton >
     .btn_prev.mkButton <
     .mkButtonGo

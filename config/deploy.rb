@@ -1,5 +1,5 @@
 
-set :application, "#{raise "Set up your application name in config/deploy.rb"}"
+set :application, "mkvd"
 
 set :domain,      "ovh.makevoid.com"
 

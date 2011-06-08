@@ -1,7 +1,6 @@
 require 'bundler'
 require 'bundler/setup'
 
-set :haml, { :format => :html5 }
 
 
 # require 'dm-core'
@@ -16,3 +15,4 @@ set :haml, { :format => :html5 }
 
 require 'voidtools'
 include Voidtools::Sinatra::ViewHelpers
+
