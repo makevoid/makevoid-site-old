@@ -7,7 +7,7 @@ set :domain,      "ovh.makevoid.com"
 
 # #set :repository,  "svn://#{domain}/svn/#{application}"
 # #default_run_options[:pty] = true  # Must be set for the password prompt from git to work
-set :repository, "git://github.com/makevoid/#{application}.git"  # public
+set :repository, "git://github.com/makevoid/makevoid.git"  # public
 
 set :scm, "git"
 set :branch, "master"
