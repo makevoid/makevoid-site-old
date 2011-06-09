@@ -10,11 +10,14 @@
 //
 //  haml (you can convert it to html): 
 //    
-//    %div#gallery{ :"data-images" => "['/imgs/image1.png', '/imgs/image2.png', '/imgs/imageN.png']" }
+//    %div#gallery{ :"data-gallery" => "[{ "name": "Foo", "template": "foo", "/imgs/foo.png"}, { "name": "Bar", "template": "bar", "/imgs/bar.png"}]" }
 //      .btn_next.mkButton >
 //      .btn_prev.mkButton <
 //
-//  note: data-images is a JSON array
+//  note: data-images is a JSON hash with:
+//    - name
+//    - template name (template)
+//    - image url (image)
 
 
 
@@ -71,13 +74,21 @@ var mkGallery = {
     this.gal_height = h // and image_height
     this.image_width = 600
     this.element = element
-    this.images_urls = eval(element.attr("data-images"))
+    this.gallery_data = eval(element.attr("data-gallery"))
+    this.images_urls = this.gallery_data.map(function(elem, idx) { return elem.image; })
+    this.currentIndex = 0
     this.draw()
     this.set_z_indexes()
     this.size_and_position()
     this.reveal()
     this.attach_events()
     this.reveal_buttons()
+  },
+  
+  postAnimationHook: function() {
+    // change content
+    console.log(this.gallery_data[this.currentIndex])
+    
   },
   
   getCenter: function () {
@@ -92,8 +103,9 @@ var mkGallery = {
   },
   
   activate_buttons: function () {
+    var self = this
     setTimeout(function() {
-      $(mkGallery.buttons_selector).addClass("active")
+      $(self.buttons_selector).addClass("active")
     }, 500)  
   },
   
@@ -101,41 +113,46 @@ var mkGallery = {
     center = this.getCenter()
     
     this.activate_buttons()
+    var self = this
     $(".btn_prev").css({left: center+"px"}).bind("click", function() {
-      mkGallery.prev()
+      self.prev()
     })
     $(".btn_next").css({left: center+550+"px"}).bind("click", function() {
-      mkGallery.next()
+      self.next()
     })    
     $(".mkButtonGo").css({left: center+200+"px"})
     
   },
   
   attach_events: function() {
-    elem = this.element
-    elem.find("img").live("click", function(event){
-      // FIXME: better check total x?
+    var self = this
+    $(function(){
+      elem = self.element
+      elem.find("img").live("click", function(event){
+        // FIXME: better check total x?
 
-      current_x = parseInt($(this).transformY())
-      center_x = parseInt(elem.find("img.mkCenter").first().transformY())
-      //console.log(current_x+" - "+center_x)
-      clicked_on_center_or_next = current_x < center_x
-      clicked_on_next = current_x != center_x
-      if (clicked_on_center_or_next)
-        mkGallery.prev()
-      else
-        if (clicked_on_next)
-          mkGallery.next()
-        else {
-          // on the center image
-          center = center_x+300
-          offset = 200
-          if (event.pageX > center+offset)
-            mkGallery.next()
-          else if (event.pageX < center-offset)
-            mkGallery.prev()
-        }
+        current_x = parseInt($(this).transformY())
+        center_x = parseInt(elem.find("img.mkCenter").first().transformY())
+        //console.log(current_x+" - "+center_x)
+        clicked_on_center_or_next = current_x < center_x
+        clicked_on_next = current_x != center_x
+        if (clicked_on_center_or_next)
+          self.prev()
+        else
+          if (clicked_on_next)
+            self.next()
+          else {
+            // on the center image
+            center = center_x+300
+            offset = 200
+            if (event.pageX > center+offset)
+              mkGallery.next()
+            else if (event.pageX < center-offset)
+              mkGallery.prev()
+          }
+      })
     })
+    
   },
   
   reveal: function() {
@@ -183,43 +200,58 @@ var mkGallery = {
     val = center2-treshold
     this.images[3].transf(x, y, { width: width, height: height, opacity: 0})
     
-    $(".mkButtonGo").css({left: center+150+"px"})
+    $(".mkButtonGo").css({left: center+200+"px"})
   },
   
   draw: function() {
     this.element.height(this.gal_height)
     
+    var self = this
     $.each_image_url(function(index, image_url) {
-      if (index > mkGallery.images_shown-1)
+      if (index > self.images_shown-1)
         return 
         
       image = $("<img class='mkHidden' src='"+image_url+"'>")
       $("#gallery").append(image)
-      mkGallery.images.push(image)
+      self.images.push(image)
     })
   },
   
   next: function() {
     this.deactivate_buttons()
+    var self = this
     setTimeout(function() {
-      images = mkGallery.images
-      mkGallery.images = images.slice(1)
-      mkGallery.images.push(images[0])
-      setTimeout(mkGallery.set_z_indexes, 200)
-      mkGallery.size_and_position()
-      mkGallery.activate_buttons()  
+      images = self.images
+      self.images = images.slice(1)
+      self.images.push(images[0])
+      
+      self.currentIndex++
+      if (self.currentIndex >= self.gallery_data.length)
+        self.currentIndex = 0
+        
+      setTimeout(self.set_z_indexes, 200)
+      self.size_and_position()
+      self.postAnimationHook()
+      self.activate_buttons()  
     }, 100)
   },
   
   prev: function() {
     this.deactivate_buttons()
+    var self = this
     setTimeout(function() {
-      images = mkGallery.images
+      images = self.images
       head = images.slice(0, images.length-1)
-      mkGallery.images = $.merge(images.slice(-1), head)
-      mkGallery.set_z_indexes()
-      mkGallery.size_and_position()
-      mkGallery.activate_buttons()
+      self.images = $.merge(images.slice(-1), head)
+      
+      self.currentIndex--
+      if (self.currentIndex < 0)
+        self.currentIndex = self.gallery_data.length-1
+        
+      self.set_z_indexes()
+      self.size_and_position()
+      self.postAnimationHook()
+      self.activate_buttons()
     }, 100)
   }
   

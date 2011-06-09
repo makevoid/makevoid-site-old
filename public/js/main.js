@@ -9,4 +9,8 @@ $(function(){
   $(".mkButtonGo").live("click", function(){
     $("html, body").animate({scrollTop: 600}, 500)
   })
+  
+  // 
+  
+  
 })

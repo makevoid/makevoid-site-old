@@ -1,7 +1,6 @@
 @import "utils.sass"
 
 =mkButton
-  background: #888
   +transition(all 0.1s ease-in-out)
   opacity: 0
   position: absolute
@@ -9,11 +8,17 @@
   font-size: 1.4em
   cursor: pointer
   z-index: 15    
+  +color(#8DC2F7)
+  color: #2670D4
+  
+=mkButtonHover
+  +color(#69AFE9)
 
   
 // style
 
 $bg: #055081
+$bg_dark: #1F2B36
 $bg_cont: #FFF
 $txt: #EEE
 $main: #999
@@ -37,18 +42,29 @@ body
 
 a
   color: $links
-a:hover
-  color: $links + #111
+a:hover  
+  color: $links
+  background: $bg - #333
 
-input[type='submit'], input.submit, a.button
+#infos a
+  font-weight: bold
+
+input[type='submit'], input.submit, a.button, a.btn//, #infos a
   +button
-  +color($main)
+  +color(#8DC2F7)
+  color: #2670D4
+  +rounded(20px)
+  margin: 6px 0
+  &hover
+    +color(#69AFE9)
+    color: #093E97
+  
 
 #container
   width: 100%
   margin: 0 auto 40px 
   padding-top: 20px
-  +simple_gradient(#1F2B36, $bg)
+  +simple_gradient($bg_dark, $bg)
   
 p 
   font-size: 0.9em
@@ -59,11 +75,20 @@ h1
   span
     font-size: 0.55em
     display: block
-h2
-  margin-bottom: 25px
-
+    
 .portfolio
-  padding-bottom: 30px
+  padding-bottom: 70px
+  
+h2
+  margin-bottom: 35px
+  font-size: 1.4em
+  
+h3
+  margin-bottom: 25px
+  font-size: 1.1em
+  font-weight: normal
+  font-family: 'Swanky and Moo Moo', serif
+  
     
 #gallery
   margin: 0 auto
@@ -112,6 +137,15 @@ h2
   
   
 #infos
-  ul.features
+  ul.features, ul.technologies
     li
+      margin: 15px 0
+      font-size: 1.1em
       display: block
+
+a.scroll_top
+  margin: 20px 0 30px
+  font-size: 1.2em
+  opacity: 0.7
+a.scroll_top:hover
+  opacity: 1
