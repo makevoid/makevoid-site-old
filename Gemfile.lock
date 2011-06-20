@@ -2,7 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     backports (2.2.1)
-    haml (3.1.1)
+    haml (3.1.2)
     json (1.5.1)
     monkey-lib (0.5.4)
       backports

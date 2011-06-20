@@ -85,10 +85,28 @@ var mkGallery = {
     this.reveal_buttons()
   },
   
+  // haml rendering
+  
+  haml: function(body) {
+    var main = Haml(body)
+    return main({})
+  },
+  
+  
+  getPage: function(object) {
+    var self = this
+    $.get("/projects/"+object.template+".haml", function(page){
+      var html = self.haml(page)
+      $("#infos").html(html)
+      $("h2").html(object.name)
+    })
+  },
+  
+  
   postAnimationHook: function() {
     // change content
-    console.log(this.gallery_data[this.currentIndex])
-    
+    object = this.gallery_data[this.currentIndex]
+    this.getPage(object)
   },
   
   getCenter: function () {
