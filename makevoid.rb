@@ -42,6 +42,7 @@ class Makevoid < Sinatra::Base
       { name: "Elisabetta Porcinai", template: "eli" },
       { name: "my open source projects on github", template: "github_projects" },
       { name: "Skicams", template: "skicams" },
+      { name: "Skicams", template: "skicams" },
     ]
     datas.each{ |data| data[:image] = "/imgs/home/#{data[:template]}.png" }
     @gallery_datas = datas.to_json

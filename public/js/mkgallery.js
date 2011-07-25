@@ -34,7 +34,7 @@ $.each_image = function(fn) {
 }
 
 $.transf = function(x, y) {
-  return { "-webkit-transform": "translate3d("+x+"px, "+y+"px, 0)", "-moz-transform": "translate("+(x/3-390)+"px, "+y+"px)" }
+  return { "-webkit-transform": "translate3d("+x+"px, "+y+"px, 20px) ", "-moz-transform": "translate("+(x/3-390)+"px, "+y+"px)" }
 }
 
 // fail? 
@@ -132,7 +132,7 @@ var mkGallery = {
     
     this.activate_buttons()
     var self = this
-    $(".btn_prev").css({left: center+"px"}).bind("click", function() {
+    $(".btn_prev").css({left: center+"px" }).bind("click", function() {
       self.prev()
     })
     $(".btn_next").css({left: center+550+"px"}).bind("click", function() {
@@ -150,16 +150,19 @@ var mkGallery = {
         // FIXME: better check total x?
 
         current_x = parseInt($(this).transformY())
+        
         center_x = parseInt(elem.find("img.mkCenter").first().transformY())
         //console.log(current_x+" - "+center_x)
         clicked_on_center_or_next = current_x < center_x
         clicked_on_next = current_x != center_x
+        
         if (clicked_on_center_or_next)
           self.prev()
         else
           if (clicked_on_next)
             self.next()
           else {
+            console.log("center")
             // on the center image
             center = center_x+300
             offset = 200
@@ -215,7 +218,7 @@ var mkGallery = {
     y -= 40 
     x = center2+treshold
     this.images[2].transf(x, y, { width: width, height: height, opacity: 0})
-    val = center2-treshold
+    x = center2-treshold
     this.images[3].transf(x, y, { width: width, height: height, opacity: 0})
     
     $(".mkButtonGo").css({left: center+200+"px"})
