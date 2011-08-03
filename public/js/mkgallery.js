@@ -28,7 +28,7 @@
 
 var mkGallery = {
   
-  images_shown: 5,
+  images_shown: 8,
   buttons_selector: ".mkButtonGo",
   images_urls: [], 
   images: [],
@@ -40,6 +40,7 @@ var mkGallery = {
     this.element = element
     this.gallery_data = eval(element.attr("data-gallery"))
     this.images_urls = this.gallery_data.map(function(elem, idx) { return elem.image; })
+    this.images_count = this.gallery_data.length
     this.currentIndex = 0
     this.draw()
     this.set_z_indexes()
@@ -192,13 +193,16 @@ var mkGallery = {
     this.element.height(this.gal_height)
     
     var self = this
-    $.each_image_url(function(index, image_url) {
-      if (index > self.images_shown-1)
-        return 
-        
-      var image = $("<img class='mkHidden' src='"+image_url+"'>")
+    $.each_image_url(function(index, image_url) {  
+      var image = $("<img class='mkHidden image_"+index+"' src='"+image_url+"'>")
       $("#gallery").append(image)
       self.images.push(image)
+      
+
+      // FIXME: values hardcoded
+      if (index > 1 && index < 6) {
+        $(".image_"+index).css({ width: 300, height: 200, opacity: 0})
+      }
     })
   },
   
