@@ -18,7 +18,7 @@
     %link{ rel: "openid.delegate", href: "http://#{openid_user}.myopenid.com/" }
     %link{ rel: "openid2.local_id", href: "http://#{openid_user}.myopenid.com" }
     %link{ rel: "openid2.provider", href: "http://www.myopenid.com/server" }
-    %meta{ http-equiv: "X-XRDS-Location", content: "http://www.myopenid.com/xrds?username=#{openid_user}.myopenid.com" }
+    %meta{ :"http-equiv" => "X-XRDS-Location", content: "http://www.myopenid.com/xrds?username=#{openid_user}.myopenid.com" }
     
   %body
     #container
