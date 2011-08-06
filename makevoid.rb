@@ -10,7 +10,7 @@ APP_PATH = path
 class Makevoid < Sinatra::Base
   require "#{APP_PATH}/config/env"
   
-       configure :development do
+  configure :development do
     register Sinatra::Reloader
     also_reload ["controllers/*.rb", "models/*.rb"]
     set :public, "public"
