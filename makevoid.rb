@@ -12,7 +12,7 @@ class Makevoid < Sinatra::Base
   
   configure :development do
     register Sinatra::Reloader
-    also_reload ["controllers/*.rb", "models/*.rb"]
+    also_reload ["controllers/*.rb", "models/*.rb", "public/projects/*.haml"]
     set :public, "public"
     set :static, true
   end
@@ -35,21 +35,51 @@ class Makevoid < Sinatra::Base
     end
   end
 
-  get "/" do
+  def order_datas(datas, page)
+    values = datas.map{ |d| d[:template] }
+    idx = values.index(page)
+    # datas.sort{ |a, b| (datas.index(a) > idx) ? -1 : 1  } 
+    data = datas[idx]
+    datas.delete_at idx
+    datas.unshift data
+    datas
+  end
+
+  def get_datas(page=nil)
     datas = [
+      { name: "makevoid", template: "makevoid" },
       { name: "Accademia Cappiello", template: "cappiello" },
       { name: "Pietro Porcinai", template: "pp" },
       { name: "Elisabetta Porcinai", template: "eli" },
-      { name: "my open source projects on github", template: "github_projects" },
+      #{ name: "my open source projects on github", template: "github_projects" },
+      { name: "jScrape", template: "jscrape" },
+      { name: "Thorrents", template: "thorrents" },
+      { name: "MangaPad", template: "mangapad" },
       { name: "Skicams", template: "skicams" },
     ]
     datas.each{ |data| data[:image] = "/imgs/home/#{data[:template]}.png" }
-    @gallery_datas = datas.to_json
+    
+    datas = order_datas(datas, page) if page
+    
+    @gallery_datas = datas
+    @gallery_json = datas.to_json
+  end
+
+  get "/" do
+    get_datas
+    @entry = @gallery_datas.first
     haml :index
   end
 
   get '/css/main.css' do
     sass :main
   end
+  
+  get "/*" do |page|
+    get_datas(page)
+    @entry = @gallery_datas.find{ |e| e[:template] == page }
+    haml :index
+  end
+
   
 end

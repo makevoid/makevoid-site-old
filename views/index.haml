@@ -1,16 +1,16 @@
 %section.portfolio
   %h3 portfolio
   
-  %div#gallery{ :"data-gallery" => @gallery_datas }
+  %div#gallery{ :"data-gallery" => @gallery_json }
     .mkButtonGo
       %p more infos
       %p v
   
 #title
-  %h2 Accademia Cappiello
+  %h2= @entry[:name]
   
 #infos
-  = haml :"../public/projects/cappiello"
+  = haml :"../public/projects/#{@entry[:template]}"
 .clear
 
   

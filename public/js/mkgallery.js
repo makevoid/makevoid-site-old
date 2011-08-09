@@ -48,6 +48,7 @@ var mkGallery = {
     this.reveal()
     this.attach_events()
     this.reveal_buttons()
+    this.manageState()
   },
   
   // haml rendering
@@ -58,8 +59,9 @@ var mkGallery = {
   },
   
   
-  getPage: function(object) {
+  getPage: function() {
     var self = this
+    var object = this.currentObject
     $.get("/projects/"+object.template+".haml", function(page){
       var html = self.haml(page)
       $("#infos").html(html)
@@ -71,7 +73,8 @@ var mkGallery = {
   postAnimationHook: function() {
     // change content
     var object = this.gallery_data[this.currentIndex]
-    this.getPage(object)
+    this.currentObject = object
+    this.getPage()
   },
   
   getCenter: function () {
@@ -222,6 +225,7 @@ var mkGallery = {
       self.size_and_position()
       self.postAnimationHook()
       self.activate_buttons()  
+      self.updateState()
     }, 100)
   },
   
@@ -241,10 +245,36 @@ var mkGallery = {
       self.size_and_position()
       self.postAnimationHook()
       self.activate_buttons()
+      self.updateState()
     }, 100)
+  },
+  
+  // state management
+  
+  updateState: function() {
+    var stateObj = this.currentObject
+    var titlePage = ""
+    var page = stateObj.template
+    if (page != "cappiello")
+      titlePage = ": "+page
+    var title = "makevoid - portfolio"+titlePage
+    if (history.pushState)
+      history.pushState(stateObj, title, "/"+page);
+  },
+  
+  manageState: function() {
+    var self = this
+    window.onpopstate = function(event){
+      state = event.state
+      if (state != undefined) {
+        self.currentObject = state
+        self.getPage()
+      }
+    }
   }
   
 }
+
 
 
 // jquery hook

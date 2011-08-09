@@ -1,7 +1,7 @@
 
 set :application, "mkvd"
 
-set :domain,      "ovh.makevoid.com"
+set :domain,      "makevoid.com"
 
 # git
 
