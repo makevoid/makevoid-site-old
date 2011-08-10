@@ -38,6 +38,7 @@ class Makevoid < Sinatra::Base
   def order_datas(datas, page)
     values = datas.map{ |d| d[:template] }
     idx = values.index(page)
+    not_found unless idx 
     # datas.sort{ |a, b| (datas.index(a) > idx) ? -1 : 1  } 
     data = datas[idx]
     datas.delete_at idx

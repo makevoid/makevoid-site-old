@@ -33,6 +33,7 @@ var mkGallery = {
   images_urls: [], 
   images: [],
   gal_height: 0,
+  parse_helpers: true, // FIXME: default should be false, this is an optional feature
   
   initialize: function(h, element) {
     this.gal_height = h // and image_height
@@ -53,7 +54,15 @@ var mkGallery = {
   
   // haml rendering
   
-  haml: function(body) {
+  parseHelpers: function(html) {
+    if (typeof html == "string")
+      html = html.replace(/- link_to\s+['"](.+?)['"]\s*,\s+['"](.+?)['"]/g, "<a href='$2'>$1</a>\n")
+    return html
+  },
+  
+  haml: function(body) {    
+    if (this.parse_helpers)
+      body = this.parseHelpers(body)
     var main = Haml(body)
     return main({})
   },
