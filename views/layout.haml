@@ -22,10 +22,19 @@
     
   %body
     #container
+      
+      %ul#nav
+        %li
+          - link_to "Updates", "http://updates.makevoid.com"
+        %li
+          - link_to "Blog",  "http://updates.makevoid.com/blog"
+        %li
+          - link_to "vCard", "http://francescocanessa.com"
+  
       %header
         %h1
           %img{ src: "/imgs/makevoid.png", alt: "makevoid" }
-      %nav
+          
       #content
         = yield
       %footer

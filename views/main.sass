@@ -69,8 +69,9 @@ input[type='submit'], input.submit, a.button, a.btn//, #infos a
 p 
   font-size: 0.9em
   
-h1 
-  margin-bottom: 10px
+h1
+  margin: 0 auto 10px auto
+  width: 500px
   font-size: 2em
   span
     font-size: 0.55em
@@ -137,6 +138,24 @@ h3
     
 #content
   -webkit-perspective: 1200px
+  
+  
+ul#nav  
+  float: right
+  display: block
+  width: 270px
+  margin-bottom: 10px
+  li a
+    +rounded(13px)
+    +button
+    +gradient($bg, $bg_dark)
+    font-size: 0.9em
+    padding: 3px 9px
+    border: 1px solid $links
+    border-left: 1px solid $links - #333
+    border-right: 1px solid $links - #333
+    border-bottom: 1px solid $links - #666
+    margin: 0 3px
   
 #gallery	
   margin-bottom: 25px
