@@ -48,6 +48,22 @@ class Makevoid < Sinatra::Base
     haml :index
   end
 
+  get "/updates" do
+    redirect "http://updates.makevoid.com"
+  end
+  
+  get "/blog" do
+    redirect "http://updates.makevoid.com/blog"
+  end
+  
+  get "/login" do
+    redirect "http://updates.makevoid.com/login"
+  end
+
+  get "/posts/*" do |splat|
+    redirect "http://updates.makevoid.com/posts/#{splat}"
+  end
+
   get '/css/main.css' do
     sass :main
   end
