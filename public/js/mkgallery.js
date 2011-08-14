@@ -18,57 +18,22 @@
 //    - name
 //    - template name (template)
 //    - image url (image)
+//
+//  remember to require gallery_helpers.js before loading this file
 
 
-
-// jquery helpers and integration
-
-$ = jQuery;
-
-$.each_image_url = function(fn) {
-  this.each(mkGallery.images_urls, fn)
-}
-
-$.each_image = function(fn) {
-  this.each(mkGallery.images, fn)
-}
-
-$.transf = function(x, y) {
-  return { "-webkit-transform": "translate3d("+x+"px, "+y+"px, 0)", "-moz-transform": "translate("+(x/3-390)+"px, "+y+"px)" }
-}
-
-// fail? 
-// Object.prototype.merge = function(obj){
-//   return $.extend(this, obj)
-// }
-
-$.fn.transf = function(x, y, options) {
-  this.css( $.extend( $.transf(x, y), options ) )
-}
-
-$.fn.transformY = function() {
-  var match
-  if ($.browser.webkit) 
-    match = this.css("-webkit-transform").match(/matrix\(1, 0, 0, 1, (\d+)/)
-  else
-    match = this.css("-moz-transform").match(/matrix\(1, 0, 0, 1, (\d+)/)
-  if (match)
-    return match[1]
-  else
-    return 0
-}
 
 
 // main object
 
 var mkGallery = {
   
-  images_shown: 5,
+  images_shown: 8,
   buttons_selector: ".mkButtonGo",
-  //buttons_selector: ".btn_prev, .btn_next, .mkButtonGo",
   images_urls: [], 
   images: [],
   gal_height: 0,
+  parse_helpers: true, // FIXME: default should be false, this is an optional feature
   
   initialize: function(h, element) {
     this.gal_height = h // and image_height
@@ -76,6 +41,7 @@ var mkGallery = {
     this.element = element
     this.gallery_data = eval(element.attr("data-gallery"))
     this.images_urls = this.gallery_data.map(function(elem, idx) { return elem.image; })
+    this.images_count = this.gallery_data.length
     this.currentIndex = 0
     this.draw()
     this.set_z_indexes()
@@ -83,18 +49,28 @@ var mkGallery = {
     this.reveal()
     this.attach_events()
     this.reveal_buttons()
+    this.manageState()
   },
   
   // haml rendering
   
-  haml: function(body) {
+  parseHelpers: function(html) {
+    if (typeof html == "string")
+      html = html.replace(/- link_to\s+['"](.+?)['"]\s*,\s+['"](.+?)['"]/g, "<a href='$2'>$1</a>\n")
+    return html
+  },
+  
+  haml: function(body) {    
+    if (this.parse_helpers)
+      body = this.parseHelpers(body)
     var main = Haml(body)
     return main({})
   },
   
   
-  getPage: function(object) {
+  getPage: function() {
     var self = this
+    var object = this.currentObject
     $.get("/projects/"+object.template+".haml", function(page){
       var html = self.haml(page)
       $("#infos").html(html)
@@ -105,13 +81,14 @@ var mkGallery = {
   
   postAnimationHook: function() {
     // change content
-    object = this.gallery_data[this.currentIndex]
-    this.getPage(object)
+    var object = this.gallery_data[this.currentIndex]
+    this.currentObject = object
+    this.getPage()
   },
   
   getCenter: function () {
-    elem_width = this.element.width()/2
-    center = elem_width - this.image_width/2
+    var elem_width = this.element.width()/2
+    var center = elem_width - this.image_width/2
     return center
   },
 
@@ -128,41 +105,36 @@ var mkGallery = {
   },
   
   reveal_buttons: function () {
-    center = this.getCenter()
+    var center = this.getCenter()
     
     this.activate_buttons()
     var self = this
-    $(".btn_prev").css({left: center+"px"}).bind("click", function() {
-      self.prev()
-    })
-    $(".btn_next").css({left: center+550+"px"}).bind("click", function() {
-      self.next()
-    })    
     $(".mkButtonGo").css({left: center+200+"px"})
-    
   },
   
   attach_events: function() {
     var self = this
     $(function(){
-      elem = self.element
+      var elem = self.element
       elem.find("img").live("click", function(event){
         // FIXME: better check total x?
-
-        current_x = parseInt($(this).transformY())
+        var current_x = parseInt($(this).transformY())
+        
         center_x = parseInt(elem.find("img.mkCenter").first().transformY())
-        //console.log(current_x+" - "+center_x)
-        clicked_on_center_or_next = current_x < center_x
-        clicked_on_next = current_x != center_x
+        // console.log(current_x+" - "+center_x)
+        var clicked_on_center_or_next = current_x < center_x
+        var clicked_on_next = current_x != center_x
+        
         if (clicked_on_center_or_next)
           self.prev()
         else
           if (clicked_on_next)
             self.next()
-          else {
-            // on the center image
-            center = center_x+300
-            offset = 200
+          else { // on the center image
+            var center = center_x+300
+            var offset = 100
+            //console.log(event.pageX, center, offset)
+            
             if (event.pageX > center+offset)
               mkGallery.next()
             else if (event.pageX < center-offset)
@@ -187,36 +159,44 @@ var mkGallery = {
   },
   
   size_and_position: function() {
-    center = this.getCenter()
-    
-    img_width = 400
-    img_height = 300
-    
+    var center = this.getCenter()
+
     $.each_image(function(index, image) {
-      image.height(img_height)
       image.removeClass("mkCenter")
     })
     
-    first = this.images[0]
+    var first = this.images[0]
     first.transf(center, 0, { width: this.image_width, height: this.gal_height, opacity: 1})
     first.addClass("mkCenter")
     
-    treshold = 200
-    center2 = this.element.width()/2 - img_width/2
-    y = this.gal_height/2 - img_height/2
-    width = img_width
-    height = img_height
-    x = center2+treshold
-    this.images[1].transf(x, y, { width: width, height: height, opacity: 0.8})
+    var treshold = 200
+    if ($.browser.mozilla)
+      treshold = 300
+    var width = 400
+    var height = 300
+    var center2 = this.element.width()/2 - width/2
+    var y = this.gal_height/2 - height/2
+    var x = center2+treshold
+    var mozx = 0
+    if ($.browser.mozilla)
+      mozx = treshold*2/1.5
+    this.images[1].transf(x+mozx, y, { width: width, height: height, opacity: 0.8})
     x = center2-treshold
-    this.images[4].transf(x, y, { width: width, height: height, opacity: 0.8})
+    this.images.back(-1).transf(x, y, { width: width, height: height, opacity: 0.8})
     
     treshold = 300
-    y -= 40 
+    if ($.browser.mozilla)
+      treshold = 500
+    width = 300
+    height = 200
+    y += 30 
+    center2 = center2+50
     x = center2+treshold
-    this.images[2].transf(x, y, { width: width, height: height, opacity: 0})
-    val = center2-treshold
-    this.images[3].transf(x, y, { width: width, height: height, opacity: 0})
+    if ($.browser.mozilla)
+      mozx = treshold*2/1.5
+    this.images[2].transf(x+mozx, y, { width: width, height: height, opacity: 0})
+    x = center2-treshold
+    this.images.back(-2).transf(x, y, { width: width, height: height, opacity: 0})
     
     $(".mkButtonGo").css({left: center+200+"px"})
   },
@@ -225,13 +205,16 @@ var mkGallery = {
     this.element.height(this.gal_height)
     
     var self = this
-    $.each_image_url(function(index, image_url) {
-      if (index > self.images_shown-1)
-        return 
-        
-      image = $("<img class='mkHidden' src='"+image_url+"'>")
+    $.each_image_url(function(index, image_url) {  
+      var image = $("<img class='mkHidden image_"+index+"' src='"+image_url+"'>")
       $("#gallery").append(image)
       self.images.push(image)
+      
+
+      // FIXME: values hardcoded
+      if (index > 1 && index < 6) {
+        $(".image_"+index).css({ width: 300, height: 200, opacity: 0})
+      }
     })
   },
   
@@ -239,7 +222,7 @@ var mkGallery = {
     this.deactivate_buttons()
     var self = this
     setTimeout(function() {
-      images = self.images
+      var images = self.images
       self.images = images.slice(1)
       self.images.push(images[0])
       
@@ -251,6 +234,7 @@ var mkGallery = {
       self.size_and_position()
       self.postAnimationHook()
       self.activate_buttons()  
+      self.updateState()
     }, 100)
   },
   
@@ -258,8 +242,8 @@ var mkGallery = {
     this.deactivate_buttons()
     var self = this
     setTimeout(function() {
-      images = self.images
-      head = images.slice(0, images.length-1)
+      var images = self.images
+      var head = images.slice(0, images.length-1)
       self.images = $.merge(images.slice(-1), head)
       
       self.currentIndex--
@@ -270,10 +254,36 @@ var mkGallery = {
       self.size_and_position()
       self.postAnimationHook()
       self.activate_buttons()
+      self.updateState()
     }, 100)
+  },
+  
+  // state management
+  
+  updateState: function() {
+    var stateObj = this.currentObject
+    var titlePage = ""
+    var page = stateObj.template
+    if (page != "cappiello")
+      titlePage = ": "+page
+    var title = "makevoid - portfolio"+titlePage
+    if (history.pushState)
+      history.pushState(stateObj, title, "/"+page);
+  },
+  
+  manageState: function() {
+    var self = this
+    window.onpopstate = function(event){
+      state = event.state
+      if (state != undefined) {
+        self.currentObject = state
+        self.getPage()
+      }
+    }
   }
   
 }
+
 
 
 // jquery hook

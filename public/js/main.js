@@ -1,6 +1,6 @@
 $(function(){
   //ui_test() 
-  $("#gallery").mkGallery(450)  
+  var gal = $("#gallery").mkGallery(450)  
   
   // other
   $(".scroll_top").live("click", function(){

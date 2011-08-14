@@ -6,18 +6,17 @@
     %li- link_to "Blog",  "http://updates.makevoid.com/blog"
     %li- link_to "vCard", "http://francescocanessa.com"
   
-  %div#gallery{ :"data-gallery" => @gallery_datas }
-    .btn_next.mkButton >
-    .btn_prev.mkButton <
+
+  %div#gallery{ :"data-gallery" => @gallery_json }
     .mkButtonGo
       %p more infos
       %p v
   
 #title
-  %h2 Accademia Cappiello
+  %h2= @entry[:name]
   
 #infos
-  = haml :"../public/projects/cappiello"
+  = haml :"../public/projects/#{@entry[:template]}"
 .clear
 
   
