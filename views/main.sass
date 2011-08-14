@@ -108,7 +108,7 @@ h4
     opacity: 0.85
     cursor: pointer
     z-index: 1
-    box-shadow: 0px 1px 12px #fff
+    +box-shadow(0px, 1px, 12px, #fff)
   img.mkHidden
     opacity: 0
   img:hover
@@ -166,7 +166,7 @@ ul#nav
   li a:hover  
     +gradient($links - #111, $bg+#222)
     color: $bg_dark
-    box-shadow: 0px -1px 7px $links
+    +box-shadow(0px, -1px, 7px, $links)
   
 #gallery	
   margin-bottom: 25px

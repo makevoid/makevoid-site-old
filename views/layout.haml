@@ -18,6 +18,12 @@
     %link{ rel: "openid2.local_id", href: "http://#{openid_user}.myopenid.com" }
     %link{ rel: "openid2.provider", href: "http://www.myopenid.com/server" }
     %meta{ :"http-equiv" => "X-XRDS-Location", content: "http://www.myopenid.com/xrds?username=#{openid_user}.myopenid.com" }
+    
+    %meta{ property: "og:title", content: "makevoid - web apps and more! - portfolio" }
+    %meta{ property: "og:url", content: "http://makevoid.com" }
+    %meta{ property: "og:type", content: "website" }
+    %meta{ property: "og:site_name", content: "Thorrents" }
+    %meta{ property: "og:image", content: "/imgs/makevoid_fb.jpg" }
     = haml :"_analytics"
     
   %body
