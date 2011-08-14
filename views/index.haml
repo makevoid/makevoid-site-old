@@ -6,7 +6,7 @@
   %div#gallery{ :"data-gallery" => @gallery_json }
     .mkButtonGo
       %p more infos
-      %p v
+      %div.arrow v
   
 #title
   %h2= @entry[:name]
@@ -16,7 +16,8 @@
 .clear
 
   
-  %a.button.scroll_top{ href: js_void } ^ go up ^
+  %a.button.scroll_top{ href: js_void } 
+    %div ^
   
 
 

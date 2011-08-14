@@ -69,6 +69,7 @@ input[type='submit'], input.submit, a.button, a.btn//, #infos a
 p 
   font-size: 0.9em
   
+  
 h1
   margin: 0 auto 10px auto
   width: 500px
@@ -78,10 +79,10 @@ h1
     display: block
     
 .portfolio
-  padding-bottom: 70px
+  padding-bottom: 0px
   
 h2
-  margin-bottom: 35px
+  margin-bottom: 45px
   font-size: 1.4em
   
 h3
@@ -90,6 +91,8 @@ h3
   font-weight: normal
   font-family: 'Swanky and Moo Moo', serif
   
+h4
+  margin: 10px 0 5px
     
 #gallery
   margin: 0 auto
@@ -131,6 +134,10 @@ h3
     padding: 25px 0 0
     +border-radius-top(30px)
     display: block
+    .arrow
+      font-family: Geneva, Lucida Grande, Verdana
+      font-size: 1.2em
+      font-weight: bold
   .mkButtonGo.active
     opacity: 0.35
   .mkButtonGo.active:hover
@@ -156,6 +163,10 @@ ul#nav
     border-right: 1px solid $links - #333
     border-bottom: 1px solid $links - #666
     margin: 0 3px
+  li a:hover  
+    +gradient($links - #111, $bg+#222)
+    color: $bg_dark
+    box-shadow: 0px -1px 7px $links
   
 #gallery	
   margin-bottom: 25px
@@ -170,10 +181,18 @@ ul#nav
       margin: 15px 0
       font-size: 1.1em
       display: block
+      p 
+        margin-top: 4px
+        font-size: 0.85em
 
 a.scroll_top
-  margin: 20px 0 30px
-  font-size: 1.2em
+  margin: 35px 0 30px
+  font-size: 1.3em
+  font-family: Verdana
   opacity: 0.7
+  padding: 0px 50px
+  div
+    position: relative
+    top: 3px
 a.scroll_top:hover
   opacity: 1

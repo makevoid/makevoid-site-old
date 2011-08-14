@@ -56,7 +56,7 @@ var mkGallery = {
   
   parseHelpers: function(html) {
     if (typeof html == "string")
-      html = html.replace(/- link_to\s+['"](.+?)['"]\s*,\s+['"](.+?)['"]/g, "<a href='$2'>$1</a>\n")
+      html = html.replace(/- link_to\s+['"](.+?)['"]\s*,\s+['"](.+?)['"]/g, "<a href='$2'>$1</a> ")
     return html
   },
   
