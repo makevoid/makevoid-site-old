@@ -85,6 +85,7 @@ class Makevoid < Sinatra::Base
   end
 
   get "/posts/*" do |splat|
+    splat = splat.gsub(/ /, '+')
     redirect "http://updates.makevoid.com/posts/#{splat}"
   end
 
