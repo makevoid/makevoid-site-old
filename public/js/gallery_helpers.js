@@ -38,7 +38,6 @@ $.fn.transf = function(x, y, options) {
     this.css( $.extend($.transf(x, y), options) )
   else {
     this.animate( $.extend({ top: y, left: x }, options), 300 )
-    console.log("asdasd")
   }
 }
 

@@ -18,7 +18,8 @@
   background-color: $bottom
   background: -webkit-gradient(linear, left top, left bottom, from($top), to($bottom))
   background: -moz-linear-gradient(top, $top,  $bottom)
-  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$top}', endColorstr='#{$bottom}')
+  // FIXME: commented because in ie9 they break border-radius
+  //  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$top}', endColorstr='#{$bottom}')
 
 @mixin button
   display: inline-block
@@ -60,28 +61,28 @@ input[type="file"] > input[type="button"]
 // mixins
 
 =border-radius($radius)
-  border-radius: $radius
   //behavior: url('/border-radius.htc')
   -moz-border-radius: $radius
   -webkit-border-radius: $radius
+  border-radius: $radius
   
 =border-radius-bottom($radius)
-  border-bottom-left-radius: $radius
-  border-bottom-right-radius: $radius
   //behavior: url('/border-radius.htc')
   -moz-border-radius-bottomleft: $radius
   -moz-border-radius-bottomright: $radius
   -webkit-border-bottom-left-radius: $radius
   -webkit-border-bottom-right-radius: $radius
+  border-bottom-left-radius: $radius
+  border-bottom-right-radius: $radius
 
 =border-radius-top($radius)
-  border-top-left-radius: $radius
-  border-top-right-radius: $radius
   //behavior: url('/border-radius.htc')
   -moz-border-radius-topleft: $radius
   -moz-border-radius-topright: $radius
   -webkit-border-top-left-radius: $radius
   -webkit-border-top-right-radius: $radius
+  border-top-left-radius: $radius
+  border-top-right-radius: $radius
   
 =simple_gradient($start_color, $end_color)
   background: $start_color
