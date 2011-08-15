@@ -24,7 +24,8 @@ $.each_image = function(fn) {
 }
 
 $.transf = function(x, y) {
-  return { "-webkit-transform": "translate3d("+x+"px, "+y+"px, 20px) ", "-moz-transform": "translate("+(x/3-390)+"px, "+y+"px)" }
+  // "-ms-transform": "translate("+x+"px, "+y+"px)",  ... yes sure!
+  return { "-o-transform": "translate("+x+"px, "+y+"px)", "-moz-transform": "translate("+(x/3-390)+"px, "+y+"px)", "-webkit-transform": "translate3d("+x+"px, "+y+"px, 20px)" }
 }
 
 // fail? 
@@ -33,7 +34,12 @@ $.transf = function(x, y) {
 // }
 
 $.fn.transf = function(x, y, options) {
-  this.css( $.extend( $.transf(x, y), options ) )
+  if (!$.browser.msie)
+    this.css( $.extend($.transf(x, y), options) )
+  else {
+    this.animate( $.extend({ top: y, left: x }, options), 300 )
+    console.log("asdasd")
+  }
 }
 
 $.fn.transformY = function() {
