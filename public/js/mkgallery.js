@@ -50,6 +50,20 @@ var mkGallery = {
     this.attach_events()
     this.reveal_buttons()
     this.manageState()
+    this.keyboardEvents()
+  },
+  
+  keyboardEvents: function() {
+    document.onkeydown = function(e) {
+      e = e || window.event;
+      var keycode = e.keyCode || e.which;
+
+      if (keycode == 39) {         
+        mkGallery.next()
+      } else if (keycode == 37) {
+        mkGallery.prev()        
+      }
+    }
   },
   
   // haml rendering
