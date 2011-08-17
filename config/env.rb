@@ -13,6 +13,8 @@ require 'bundler/setup'
 #   require model
 # end
 
+
 require 'voidtools'
 include Voidtools::Sinatra::ViewHelpers
-
+require 'voidtools/sinatra/tracking'
+include Voidtools::Tracking

@@ -18,4 +18,4 @@ gem 'rack-flash'
 # gem 'dm-mysql-adapter'
 
 #gem "extlib"
-gem 'voidtools'
+gem 'voidtools', git: "git://github.com/makevoid/voidtools"
