@@ -7,6 +7,6 @@ def resize(dir, src, dest)
 end
 
 path = File.expand_path "../", __FILE__
-Dir.glob("#{path}/home/*.png").each do |file|
+Dir.glob(/#{path}\/projects\/*.(png|jpg|svg)/).each do |file|
   resize "home", file, file 
 end
