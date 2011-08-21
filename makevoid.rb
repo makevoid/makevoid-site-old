@@ -46,6 +46,9 @@ class Makevoid < Sinatra::Base
     datas
   end
 
+  #MKVD_FORMAT = "svg"
+  MKVD_FORMAT = "png"
+  
   def get_datas(page=nil)
     datas = [
       { name: "makevoid", template: "makevoid" },
@@ -56,9 +59,13 @@ class Makevoid < Sinatra::Base
       { name: "jScrape", template: "jscrape" },
       { name: "Thorrents", template: "thorrents" },
       { name: "MangaPad", template: "mangapad" },
-      { name: "Skicams", template: "skicams" },
+      { name: "SkiCams", template: "skicams" },
+      { name: "StyleQuiz", template: "stylequiz" },
     ]
-    datas.each{ |data| data[:image] = "/imgs/home/#{data[:template]}.png" }
+    datas.each do |data| 
+      frmt = data[:template] == "makevoid" ? MKVD_FORMAT : "png"
+      data[:image] = "/imgs/projects/#{data[:template]}.#{frmt}" 
+    end
     
     datas = order_datas(datas, page) if page
     

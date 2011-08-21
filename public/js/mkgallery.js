@@ -42,6 +42,7 @@ var mkGallery = {
     this.gallery_data = eval(element.attr("data-gallery"))
     this.images_urls = this.gallery_data.map(function(elem, idx) { return elem.image; })
     this.images_count = this.gallery_data.length
+    this.images_shown = this.gallery_data.length-1
     this.currentIndex = 0
     this.draw()
     this.set_z_indexes()
