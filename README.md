@@ -5,4 +5,5 @@
 ### TODO:
 
 - find webkit (and moz) post transition hook
+https://github.com/benbarnett/jQuery-Animate-Enhanced
 
