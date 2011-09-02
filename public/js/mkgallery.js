@@ -227,6 +227,9 @@ var mkGallery = {
       // FIXME: values hardcoded
       if (index > 1 && index < 6) {
         $(".image_"+index).css({ width: 300, height: 200, opacity: 0})
+      } else {
+        console.log($(".image_"+index))
+        $(".image_"+index).css({ width: 300, height: 200, opacity: 0})
       }
     })
   },
