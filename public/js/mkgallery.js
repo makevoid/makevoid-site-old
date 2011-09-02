@@ -44,7 +44,9 @@ var mkGallery = {
     this.currentIndex = 0
     this.draw()
     this.set_z_indexes()
+    this.body_width_start = $("body").width()
     this.size_and_position()
+    
     this.reveal()
     this.attach_events()
     this.reveal_buttons()
@@ -211,7 +213,9 @@ var mkGallery = {
     x = center2-treshold
     this.images.back(-2).transf(x, y, { width: width, height: height, opacity: 0})
     
-    $(".mkButtonGo").css({left: center+200+"px"})
+
+    body_width_diff = $("body").width() - this.body_width_start
+    $(".mkButtonGo").transf(body_width_diff/2, 0, {})//.css({left: center+200+"px"})
   },
   
   draw: function() {
@@ -228,7 +232,6 @@ var mkGallery = {
       if (index > 1 && index < 6) {
         $(".image_"+index).css({ width: 300, height: 200, opacity: 0})
       } else {
-        console.log($(".image_"+index))
         $(".image_"+index).css({ width: 300, height: 200, opacity: 0})
       }
     })
