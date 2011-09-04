@@ -215,6 +215,8 @@ var mkGallery = {
     
 
     body_width_diff = $("body").width() - this.body_width_start
+    if ($.browser.mozilla)
+      body_width_diff = $("body").width()*2.1 + $("body").width() - this.body_width_start
     $(".mkButtonGo").transf(body_width_diff/2, 0, {})//.css({left: center+200+"px"})
   },
   
@@ -309,7 +311,7 @@ var mkGallery = {
 
 $.fn.mkGallery = function(height) {
   mkGallery.initialize(height, $(this))
-  $(window).resize(function(){
+  $(window).bind("resize", function(){
     mkGallery.size_and_position()
   })
   return this;
