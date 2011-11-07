@@ -16,6 +16,7 @@ class Makevoid < Sinatra::Base
     set :public, "public"
     set :static, true
   end
+  set :logging, true
   
   set :haml, { :format => :html5 }
   require 'rack-flash'

@@ -39,6 +39,7 @@ $.fn.transf = function(x, y, options) {
   else {
     this.animate( $.extend({ top: y, left: x }, options), 300 )
   }
+  return this
 }
 
 $.fn.transformY = function() {
