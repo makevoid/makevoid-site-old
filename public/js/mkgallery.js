@@ -21,8 +21,10 @@
 //
 //  remember to require gallery_helpers.js before loading this file
 
-
-
+if (!console)
+  console = {}
+  if (!console.log)
+    console.log = function() {}
 
 // main object
 
@@ -273,10 +275,11 @@ var mkGallery = {
         
       setTimeout(self.set_z_indexes, 200)
       self.size_and_position()
-      if (!no_hook)
+      if (!no_hook) {
         self.postAnimationHook()
-      self.activate_buttons()  
-      self.updateState()
+        self.activate_buttons()
+        self.updateState()
+      }
     }, 100)
   },
   
@@ -294,10 +297,11 @@ var mkGallery = {
         
       self.set_z_indexes()
       self.size_and_position()
-      if (!no_hook)
+      if (!no_hook) {
         self.postAnimationHook()
-      self.activate_buttons()
-      self.updateState()
+        self.activate_buttons()
+        self.updateState()
+      }
     }, 100)
   },
   
