@@ -28,10 +28,10 @@ $.transf = function(x, y, scale) {
   
   
   if (navigator.userAgent.match(/Chrome/)) {
-    x = x-$("body").width()/3+120
+    // x = x-$("body").width()/3+120
     webkit = "translate3d("+x+"px, "+y+"px, 0) scale("+scale+", "+scale+")"
   } else {
-    webkit = "translate3d("+x+"px, "+y+"px, 0) scale3d("+scale+", "+scale+", 0)"
+    webkit = "translate3d("+x+"px, "+y+"px, 120px) scale3d("+scale+", "+scale+", 0)"
   }
   
 

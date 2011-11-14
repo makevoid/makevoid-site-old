@@ -52,6 +52,19 @@ var mkGallery = {
     this.reveal_buttons()
     this.manageState()
     this.keyboardEvents()
+    
+    this.lameFixForChrome()
+  },
+  
+  lameFixForChrome: function() {
+    if (navigator.userAgent.match(/Chrome/)) {
+      this.next(true)
+      this.next(true)
+      this.next(true)
+      this.prev(true)
+      this.prev(true)
+      this.prev(true)
+    }
   },
   
   keyboardEvents: function() {
@@ -132,12 +145,13 @@ var mkGallery = {
     $(function(){
       var elem = self.element
       elem.find("img").live("click", function(event){
+        console.log('img clicked')
         // FIXME: better check total x?
         var current_x = parseInt($(this).transformY())
         
         center_x = parseInt(elem.find("img.mkCenter").first().transformY())
         // console.log(elem.find("img.mkCenter"))
-        console.log(current_x+" - "+center_x)
+        // console.log(current_x+" - "+center_x)
         var clicked_on_center_or_next = current_x < center_x
         var clicked_on_next = current_x != center_x
         
@@ -196,6 +210,7 @@ var mkGallery = {
     var mozx = 0
     if ($.browser.mozilla)
       mozx = treshold*2/1.5
+    // this.images[1].css({display: "block", opacity: 0})
     this.images[1].transf(x+mozx, y, 0.6, { opacity: 0.8})
     x = center2-treshold
     
@@ -211,9 +226,9 @@ var mkGallery = {
     x = center2+treshold
     if ($.browser.mozilla)
       mozx = treshold*2/1.5
-    this.images[2].transf(x+mozx, y, 0.4, { opacity: 0})
+    this.images[2].css({display: "block"}).transf(x+mozx, y, 0.4, { opacity: 0})
     x = center2-treshold
-    this.images.back(-2).transf(x, y, 0.4, { opacity: 0})
+    this.images.back(-2).css({display: "block"}).transf(x, y, 0.4, { opacity: 0})
     
 
     body_width_diff = $("body").width() - this.body_width_start
@@ -236,15 +251,15 @@ var mkGallery = {
       tot = self.images_urls.length
       num_shown = 2
       if (index >= 0 && index <= num_shown || index <= tot && index >= tot - num_shown ) {
+        $(".image_"+index).css({ opacity: 0 })
       } else {
-        $(".image_"+index).transf(self.getCenter(), 0, 0.4)
+        $(".image_"+index).transf(self.getCenter(), 0, 0.4).hide()
       }
       
-      $(".image_"+index).css({ opacity: 0 })
     })
   },
   
-  next: function() {
+  next: function(no_hook) {
     this.deactivate_buttons()
     var self = this
     setTimeout(function() {
@@ -258,13 +273,14 @@ var mkGallery = {
         
       setTimeout(self.set_z_indexes, 200)
       self.size_and_position()
-      self.postAnimationHook()
+      if (!no_hook)
+        self.postAnimationHook()
       self.activate_buttons()  
       self.updateState()
     }, 100)
   },
   
-  prev: function() {
+  prev: function(no_hook) {
     this.deactivate_buttons()
     var self = this
     setTimeout(function() {
@@ -278,7 +294,8 @@ var mkGallery = {
         
       self.set_z_indexes()
       self.size_and_position()
-      self.postAnimationHook()
+      if (!no_hook)
+        self.postAnimationHook()
       self.activate_buttons()
       self.updateState()
     }, 100)
