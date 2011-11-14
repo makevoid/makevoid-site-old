@@ -19,3 +19,6 @@ gem 'rack-flash'
 
 #gem "extlib"
 gem 'voidtools', git: "git://github.com/makevoid/voidtools"
+
+gem "guard"
+gem "guard-livereload"

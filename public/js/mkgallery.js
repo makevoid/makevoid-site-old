@@ -136,7 +136,8 @@ var mkGallery = {
         var current_x = parseInt($(this).transformY())
         
         center_x = parseInt(elem.find("img.mkCenter").first().transformY())
-        // console.log(current_x+" - "+center_x)
+        // console.log(elem.find("img.mkCenter"))
+        console.log(current_x+" - "+center_x)
         var clicked_on_center_or_next = current_x < center_x
         var clicked_on_next = current_x != center_x
         
@@ -168,36 +169,37 @@ var mkGallery = {
   
   set_z_indexes: function() {    
     $.each_image(function(index, image) {
-      image.css({zIndex: 10-index})        
+      image.css({zIndex: 12-index})        
     })
 //    this.images[0].css({zIndex: 2})
   },
   
   size_and_position: function() {
     var center = this.getCenter()
-
+    
     $.each_image(function(index, image) {
       image.removeClass("mkCenter")
     })
     
     var first = this.images[0]
-    first.transf(center, 0, { width: this.image_width, height: this.gal_height, opacity: 1})
+    first.transf(center, 0, 1, { opacity: 1})
     first.addClass("mkCenter")
     
     var treshold = 200
     if ($.browser.mozilla)
       treshold = 300
-    var width = 400
-    var height = 300
-    var center2 = this.element.width()/2 - width/2
+    var width = 600
+    var height = 400
+    var center2 = $("body").width()/2 - width/2
     var y = this.gal_height/2 - height/2
     var x = center2+treshold
     var mozx = 0
     if ($.browser.mozilla)
       mozx = treshold*2/1.5
-    this.images[1].transf(x+mozx, y, { width: width, height: height, opacity: 0.8})
+    this.images[1].transf(x+mozx, y, 0.6, { opacity: 0.8})
     x = center2-treshold
-    this.images.back(-1).transf(x, y, { width: width, height: height, opacity: 0.8})
+    
+    this.images.back(-1).transf(x, y, 0.6, { opacity: 0.8})
     
     treshold = 300
     if ($.browser.mozilla)
@@ -209,9 +211,9 @@ var mkGallery = {
     x = center2+treshold
     if ($.browser.mozilla)
       mozx = treshold*2/1.5
-    this.images[2].transf(x+mozx, y, { width: width, height: height, opacity: 0})
+    this.images[2].transf(x+mozx, y, 0.4, { opacity: 0})
     x = center2-treshold
-    this.images.back(-2).transf(x, y, { width: width, height: height, opacity: 0})
+    this.images.back(-2).transf(x, y, 0.4, { opacity: 0})
     
 
     body_width_diff = $("body").width() - this.body_width_start
@@ -225,17 +227,20 @@ var mkGallery = {
     
     var self = this
     $.each_image_url(function(index, image_url) {  
+      // console.log(image_url)
       var image = $("<img class='mkHidden image_"+index+"' src='"+image_url+"'>")
       $("#gallery").append(image)
+      // console.log(index, image_url)
       self.images.push(image)
       
-
-      // FIXME: values hardcoded
-      if (index > 1 && index < 6) {
-        $(".image_"+index).css({ width: 300, height: 200, opacity: 0})
+      tot = self.images_urls.length
+      num_shown = 2
+      if (index >= 0 && index <= num_shown || index <= tot && index >= tot - num_shown ) {
       } else {
-        $(".image_"+index).css({ width: 300, height: 200, opacity: 0})
+        $(".image_"+index).transf(self.getCenter(), 0, 0.4)
       }
+      
+      $(".image_"+index).css({ opacity: 0 })
     })
   },
   

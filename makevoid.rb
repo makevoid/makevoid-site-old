@@ -11,8 +11,8 @@ class Makevoid < Sinatra::Base
   require "#{APP_PATH}/config/env"
   
   configure :development do
-    register Sinatra::Reloader
-    also_reload ["controllers/*.rb", "models/*.rb", "public/projects/*.haml"]
+    # register Sinatra::Reloader
+    # also_reload ["controllers/*.rb", "models/*.rb", "public/projects/*.haml"]
     set :public, "public"
     set :static, true
   end

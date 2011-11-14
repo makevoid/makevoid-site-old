@@ -96,27 +96,25 @@ h4
     
 #gallery
   margin: 0 auto
-  position: relative
   overflow: hidden
   padding-bottom: 20px
   height: 450px
+  
   img 
-    width: 400px
-    height: 300px
+    width: 600px
+    height: 450px
     position: absolute
     //transition2(opacity 0.5s ease-in-out, left 1s ease-in-out)
     +transition(all 0.5s ease-in-out)
     opacity: 0.85
     cursor: pointer
     z-index: 1
-    +box-shadow(0px, 1px, 12px, #fff)
+    +box-shadow(0px, 1px, 10px, #fff)
   img.mkHidden
     opacity: 0
   img:hover
-    -webkit-transform: scale3d(1.1)
-    opacity: 1
-  .image_6, .image_7, image_8, image_9, image_10, image_11, image_12, image_13, image_14, image_15, image_16, image_17, image_18, image_19, image_20
-    opacity: 0
+    opacity: 0.5
+
   
   .mkButton
     +mkButton
@@ -129,7 +127,7 @@ h4
     opacity: 0.7
   .mkButtonGo
     +mkButton
-    top: 343px
+    top: 392px
     left: 390px
     width: 200px
     height: 80px

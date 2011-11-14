@@ -1,7 +1,7 @@
 
 set :application, "mkvd"
 
-set :domain,      "makevoid.com"
+set :domain, "kim.makevoid.com" # old: makevoid.com
 
 # git
 
