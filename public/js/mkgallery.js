@@ -56,6 +56,16 @@ var mkGallery = {
     this.keyboardEvents()
     
     this.lameFixForChrome()
+    this.lameFixForSafari()
+  },
+  
+  lameFixForSafari: function() {
+    if (!navigator.userAgent.match(/Chrome/) && $.browser.webkit) {
+      self = this
+      $("#gallery").bind("click", function(){
+        self.next()
+      })
+    }
   },
   
   lameFixForChrome: function() {
@@ -198,7 +208,9 @@ var mkGallery = {
     })
     
     var first = this.images[0]
-    first.transf(center, 0, 1, { opacity: 1})
+    var base_scale = 1
+    
+    first.transf(center, 0, base_scale*1, { opacity: 1})
     first.addClass("mkCenter")
     
     var treshold = 200
@@ -210,13 +222,13 @@ var mkGallery = {
     var y = this.gal_height/2 - height/2
     var x = center2+treshold
     var mozx = 0
+    
     if ($.browser.mozilla)
       mozx = treshold*2/1.5
     // this.images[1].css({display: "block", opacity: 0})
-    this.images[1].transf(x+mozx, y, 0.6, { opacity: 0.8})
+    this.images[1].transf(x+mozx, y, base_scale*0.6, { opacity: 0.8})
     x = center2-treshold
-    
-    this.images.back(-1).transf(x, y, 0.6, { opacity: 0.8})
+    this.images.back(-1).transf(x, y, base_scale*0.6, { opacity: 0.8})
     
     treshold = 300
     if ($.browser.mozilla)
@@ -228,9 +240,9 @@ var mkGallery = {
     x = center2+treshold
     if ($.browser.mozilla)
       mozx = treshold*2/1.5
-    this.images[2].css({display: "block"}).transf(x+mozx, y, 0.4, { opacity: 0})
+    this.images[2].css({display: "block"}).transf(x+mozx, y, base_scale*0.4, { opacity: 0})
     x = center2-treshold
-    this.images.back(-2).css({display: "block"}).transf(x, y, 0.4, { opacity: 0})
+    this.images.back(-2).css({display: "block"}).transf(x, y, base_scale*0.4, { opacity: 0})
     
 
     body_width_diff = $("body").width() - this.body_width_start
