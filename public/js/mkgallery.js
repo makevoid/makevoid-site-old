@@ -62,8 +62,9 @@ var mkGallery = {
   lameFixForSafari: function() {
     if (!navigator.userAgent.match(/Chrome/) && $.browser.webkit) {
       self = this
-      $("#gallery").bind("click", function(){
-        self.next()
+      $("#gallery").bind("click", function(evt){
+        if ($(evt.target).attr("id") == "gallery")
+          self.next()
       })
     }
   },
