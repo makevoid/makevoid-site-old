@@ -13,15 +13,15 @@ class Makevoid < Sinatra::Base
   configure :development do
     # register Sinatra::Reloader
     # also_reload ["controllers/*.rb", "models/*.rb", "public/projects/*.haml"]
-    set :public, "public"
+    set :public_folder, "public"
     set :static, true
   end
   set :logging, true
   
   set :haml, { :format => :html5 }
-  require 'rack-flash'
+  # require 'rack-flash'
   enable :sessions
-  use Rack::Flash
+  # use Rack::Flash
   require 'sinatra/content_for'
   helpers Sinatra::ContentFor
   set :method_override, true
@@ -43,7 +43,8 @@ class Makevoid < Sinatra::Base
     # datas.sort{ |a, b| (datas.index(a) > idx) ? -1 : 1  } 
     data = datas[idx]
     datas.delete_at idx
-    datas.unshift data
+    # datas.unshift data
+    datas.insert 2, data
     datas
   end
 
@@ -52,9 +53,9 @@ class Makevoid < Sinatra::Base
   
   def get_datas(page=nil)
     datas = [
-      { name: "makevoid", template: "makevoid" },
       { name: "Accademia Cappiello", template: "cappiello" },
       { name: "Pietro Porcinai", template: "pp" },
+      { name: "makevoid", template: "makevoid" },
       { name: "Elisabetta Porcinai", template: "eli" },
       #{ name: "my open source projects on github", template: "github_projects" },
       { name: "jScrape", template: "jscrape" },
@@ -76,7 +77,7 @@ class Makevoid < Sinatra::Base
 
   get "/" do
     get_datas
-    @entry = @gallery_datas.first
+    @entry = @gallery_datas[2]
     haml :index
   end
 

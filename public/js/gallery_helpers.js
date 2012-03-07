@@ -34,8 +34,7 @@ $.transf = function(x, y, scale) {
     webkit = "translate3d("+x+"px, "+y+"px, 0) scale3d("+scale+", "+scale+", 0)"
   }
   
-
-  return { "-o-transform": "translate("+x+"px, "+y+"px)", "-moz-transform": "translate("+(x/3-390)+"px, "+y+"px) scale("+scale+", "+scale+")", "-webkit-transform": webkit }
+  return { "-o-transform": "translate("+x+"px, "+y+"px)", "-moz-transform": "translate3d("+(x/3-390)+"px, "+y+"px, 1px) scale3d("+scale+", "+scale+", 1)", "-webkit-transform": webkit }
 }
 
 // fail? 
