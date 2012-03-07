@@ -142,6 +142,7 @@
     page = stateObj.template;
     if (page !== "cappiello") titlePage = ": " + page;
     title = "makevoid - portfolio" + titlePage;
+    if (page === "makevoid") page = "";
     if (history.pushState) return history.pushState(stateObj, title, "/" + page);
   };
 

@@ -103,6 +103,7 @@ mkGallery.updateState = ->
   page = stateObj.template
   titlePage = ": " + page  unless page is "cappiello"
   title = "makevoid - portfolio" + titlePage
+  page = "" if page == "makevoid"
   history.pushState stateObj, title, "/" + page  if history.pushState
   
 mkGallery.manageState = ->
