@@ -75,9 +75,10 @@ mkGallery.keyboardEvents = ->
   document.onkeydown = (e) ->
     e = e or window.event
     keycode = e.keyCode or e.which
-    if keycode is 39
+    if keycode is 37
       mkGallery.next()
-    else mkGallery.prev()  if keycode is 37
+    if keycode is 39
+      mkGallery.prev()  
 
 mkGallery.parseHelpers = (html) ->
   html = html.replace(/- link_to\s+['"](.+?)['"]\s*,\s+['"](.+?)['"]/g, " <a href='$2'>$1</a> ")  if typeof html is "string"

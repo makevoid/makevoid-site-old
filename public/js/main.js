@@ -100,11 +100,8 @@
       var keycode;
       e = e || window.event;
       keycode = e.keyCode || e.which;
-      if (keycode === 39) {
-        return mkGallery.next();
-      } else {
-        if (keycode === 37) return mkGallery.prev();
-      }
+      if (keycode === 37) mkGallery.next();
+      if (keycode === 39) return mkGallery.prev();
     };
   };
 

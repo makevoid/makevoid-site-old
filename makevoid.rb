@@ -9,7 +9,7 @@ APP_PATH = path
 
 class Makevoid < Sinatra::Base
   require "#{APP_PATH}/config/env"
-  
+
   configure :development do
     # register Sinatra::Reloader
     # also_reload ["controllers/*.rb", "models/*.rb", "public/projects/*.haml"]
@@ -17,7 +17,7 @@ class Makevoid < Sinatra::Base
     set :static, true
   end
   set :logging, true
-  
+
   set :haml, { :format => :html5 }
   # require 'rack-flash'
   enable :sessions
@@ -29,7 +29,7 @@ class Makevoid < Sinatra::Base
   def not_found(object=nil)
     halt 404, "404 - Page Not Found"
   end
-  
+
   helpers do
     def js_void
       "javascript:void(0)"
@@ -39,8 +39,8 @@ class Makevoid < Sinatra::Base
   def order_datas(datas, page)
     values = datas.map{ |d| d[:template] }
     idx = values.index(page)
-    not_found unless idx 
-    # datas.sort{ |a, b| (datas.index(a) > idx) ? -1 : 1  } 
+    not_found unless idx
+    # datas.sort{ |a, b| (datas.index(a) > idx) ? -1 : 1  }
     data = datas[idx]
     datas.delete_at idx
     # datas.unshift data
@@ -50,27 +50,28 @@ class Makevoid < Sinatra::Base
 
   #MKVD_FORMAT = "svg"
   MKVD_FORMAT = "png"
-  
+
   def get_datas(page=nil)
     datas = [
-      { name: "Accademia Cappiello", template: "cappiello" },
-      { name: "Pietro Porcinai", template: "pp" },
-      { name: "makevoid", template: "makevoid" },
-      { name: "Elisabetta Porcinai", template: "eli" },
+      { name: "Accademia Cappiello",  template: "cappiello" },
+      { name: "RiotVan",              template: "riotvan" },
+      { name: "makevoid",             template: "makevoid" },
+      { name: "Elisabetta Porcinai",  template: "eli" },
+      { name: "Pietro Porcinai",      template: "pp" },
       #{ name: "my open source projects on github", template: "github_projects" },
-      { name: "jScrape", template: "jscrape" },
-      { name: "Thorrents", template: "thorrents" },
-      { name: "MangaPad", template: "mangapad" },
-      { name: "SkiCams", template: "skicams" },
-      { name: "StyleQuiz", template: "stylequiz" },
+      { name: "jScrape",              template: "jscrape" },
+      { name: "Thorrents",            template: "thorrents" },
+      { name: "MangaPad",             template: "mangapad" },
+      { name: "SkiCams",              template: "skicams" },
+      #{ name: "StyleQuiz", template: "stylequiz" },
     ]
-    datas.each do |data| 
+    datas.each do |data|
       frmt = data[:template] == "makevoid" ? MKVD_FORMAT : "png"
-      data[:image] = "/imgs/projects/#{data[:template]}.#{frmt}" 
+      data[:image] = "/imgs/projects/#{data[:template]}.#{frmt}"
     end
-    
+
     datas = order_datas(datas, page) if page
-    
+
     @gallery_datas = datas
     @gallery_json = datas.to_json
   end
@@ -84,11 +85,11 @@ class Makevoid < Sinatra::Base
   get "/updates" do
     redirect "http://updates.makevoid.com"
   end
-  
+
   get "/blog" do
     redirect "http://updates.makevoid.com/blog"
   end
-  
+
   get "/login" do
     redirect "http://updates.makevoid.com/login"
   end
@@ -101,12 +102,12 @@ class Makevoid < Sinatra::Base
   get '/css/main.css' do
     sass :main
   end
-  
+
   get "/*" do |page|
     get_datas(page)
     @entry = @gallery_datas.find{ |e| e[:template] == page }
     haml :index
   end
 
-  
+
 end
