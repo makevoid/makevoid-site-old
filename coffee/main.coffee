@@ -70,6 +70,10 @@ mkGallery.update_classes = ->
 mkGallery.chrome_fix = ->
   if navigator.userAgent.match /Chrome/
     $("#gallery").width($("#gallery").width())
+    
+    $(window).on "resize", ->
+      $("#gallery").width($("#gallery").width())
+      
 
 mkGallery.keyboardEvents = ->
   document.onkeydown = (e) ->
