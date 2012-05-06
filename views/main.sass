@@ -86,37 +86,31 @@ h2
   font-size: 1.4em
   
 h3
-  margin-bottom: 25px
+  margin: 20px 0 25px
   font-size: 1.1em
-  font-weight: normal
-  font-family: 'Swanky and Moo Moo', serif
+  font-weight: bold
   
 h4
   margin: 10px 0 5px
     
 #gallery
-  margin: 0 auto
-  position: relative
-  overflow: hidden
-  padding-bottom: 20px
+  //overflow: hidden
+  //padding-bottom: 20px
   height: 450px
+  margin: 0 auto
   img 
-    width: 400px
-    height: 300px
     position: absolute
-    //transition2(opacity 0.5s ease-in-out, left 1s ease-in-out)
+    width: 600px
+    height: 450px
     +transition(all 0.5s ease-in-out)
     opacity: 0.85
-    cursor: pointer
-    z-index: 1
-    +box-shadow(0px, 1px, 12px, #fff)
+    z-index: 30
+    +box-shadow(0px, 1px, 10px, #fff)
   img.mkHidden
     opacity: 0
   img:hover
-    -webkit-transform: scale3d(1.1)
     opacity: 1
-  .image_6, .image_7, image_8, image_9, image_10, image_11, image_12, image_13, image_14, image_15, image_16, image_17, image_18, image_19, image_20
-    opacity: 0
+
   
   .mkButton
     +mkButton
@@ -129,7 +123,7 @@ h4
     opacity: 0.7
   .mkButtonGo
     +mkButton
-    top: 343px
+    top: 392px
     left: 390px
     width: 200px
     height: 80px
@@ -149,6 +143,51 @@ h4
     
 #content
   -webkit-perspective: 1200px
+
+
+#gallery
+  $scale: 0.6
+  $scale_min: 0.4
+  img
+    opacity: 0
+    z-index: 1
+  .image_1, .image_3
+    opacity: 0.8
+    z-index: 2
+  .image_2
+    opacity: 0.9
+    z-index: 3
+  
+  @for $i from 0 through 20 
+    .image_#{$i} 
+      +transform(translate3d(-60%, 60px, 0) scale3d($scale_min, $scale_min, 1))
+    .image_#{$i}:hover
+      opacity: 0
+      
+  .image_1:hover, .image_2:hover, .image_3:hover
+    opacity: 1
+    cursor: pointer
+      
+  .image_0  
+    +transform(translate3d(-60%, 60px, 0) scale3d($scale_min, $scale_min, 1))
+  .image_1  
+    +transform(translate3d(-40%, 40px, 20px) scale3d($scale, $scale, 1))
+  .image_2    
+    +transform(translate3d(0, 0, 30px))
+  .image_3  
+    +transform(translate3d(40%, 40px, 20px) scale3d($scale, $scale, 1))
+  .image_4  
+    +transform(translate3d(60%, 60px, 0) scale3d($scale_min, $scale_min, 1))
+
+
+.safari #gallery
+
+  width: 600px
+  
+
+.firefox #gallery
+  position: relative
+  left: -25%
 
 //...i found that to fix it you have to apply the filter before rounding the border... this way it works... no words...
   
@@ -189,7 +228,7 @@ ul#nav
       p 
         margin-top: 4px
         font-size: 0.85em
-
+  
 a.scroll_top
   margin: 35px 0 30px
   font-size: 1.3em
@@ -206,3 +245,8 @@ p.info
   font-size: 1.15em
   font-weight: bold
   margin-bottom: 20px
+  span
+    display: block
+    font-weight: normal
+    font-size: 0.9em
+  

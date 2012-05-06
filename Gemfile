@@ -6,7 +6,7 @@ gem 'sinatra'
 gem 'json'
 gem "sinatra-content-for"
 gem "sinatra-reloader"
-gem 'rack-flash'
+# gem 'rack-flash'
 #gem 'rack-static'
 # gem 'dm-core'
 # # gem 'dm-sqlite-adapter'
@@ -19,3 +19,6 @@ gem 'rack-flash'
 
 #gem "extlib"
 gem 'voidtools', git: "git://github.com/makevoid/voidtools"
+
+gem "guard"
+gem "guard-livereload"

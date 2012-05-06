@@ -23,9 +23,18 @@ $.each_image = function(fn) {
   this.each(mkGallery.images, fn)
 }
 
-$.transf = function(x, y) {
+$.transf = function(x, y, scale) {
   // "-ms-transform": "translate("+x+"px, "+y+"px)",  ... yes sure!
-  return { "-o-transform": "translate("+x+"px, "+y+"px)", "-moz-transform": "translate("+(x/3-390)+"px, "+y+"px)", "-webkit-transform": "translate3d("+x+"px, "+y+"px, 20px)" }
+  
+  
+  if (navigator.userAgent.match(/Chrome/)) {
+    // x = x-$("body").width()/3+120
+    webkit = "translate3d("+x+"px, "+y+"px, 0) scale("+scale+", "+scale+")"
+  } else {
+    webkit = "translate3d("+x+"px, "+y+"px, 0) scale3d("+scale+", "+scale+", 0)"
+  }
+  
+  return { "-o-transform": "translate("+x+"px, "+y+"px)", "-moz-transform": "translate3d("+(x/3-390)+"px, "+y+"px, 1px) scale3d("+scale+", "+scale+", 1)", "-webkit-transform": webkit }
 }
 
 // fail? 
@@ -33,11 +42,13 @@ $.transf = function(x, y) {
 //   return $.extend(this, obj)
 // }
 
-$.fn.transf = function(x, y, options) {
+$.fn.transf = function(x, y, scale, options) {  
+  max_width = 600
+  max_height = 450
   if (!$.browser.msie)
-    this.css( $.extend($.transf(x, y), options) )
+    this.css( $.extend($.transf(x, y, scale), options) )
   else {
-    this.animate( $.extend({ top: y, left: x }, options), 300 )
+    this.animate( $.extend({ top: y, left: x, width: max_width*scale, height: max_height*scale }, options), 300 )
   }
   return this
 }
