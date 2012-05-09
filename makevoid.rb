@@ -1,7 +1,6 @@
 require 'haml'
 require 'sass'
 require 'sinatra/base'
-require "sinatra/reloader"
 require 'json'
 
 path = File.expand_path "../", __FILE__
