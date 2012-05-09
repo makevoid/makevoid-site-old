@@ -29,7 +29,7 @@
     return this.manageState();
   };
 
-  mkGallery.index = 2;
+  mkGallery.index = 3;
 
   mkGallery.gallery = $("#gallery");
 
@@ -67,14 +67,18 @@
 
   mkGallery.next = function() {
     this.index = this.index + 1;
-    if (this.index > this.size() - 1) this.index = 0;
+    if (this.index > this.size() - 1) {
+      this.index = 0;
+    }
     this.update_classes();
     return this.get_page();
   };
 
   mkGallery.prev = function() {
     this.index = this.index - 1;
-    if (this.index < 0) this.index = this.size() - 1;
+    if (this.index < 0) {
+      this.index = this.size() - 1;
+    }
     this.update_classes();
     return this.get_page();
   };
@@ -84,14 +88,17 @@
     return _(this.images()).each(function(image, idx) {
       var img;
       $(image).removeClass();
-      img = (_this.index + 2 - idx + 9) % _this.size();
+      img = (_this.index + 2 - idx + _this.size()) % _this.size();
       return $(image).addClass("image_" + img);
     });
   };
 
   mkGallery.chrome_fix = function() {
     if (navigator.userAgent.match(/Chrome/)) {
-      return $("#gallery").width($("#gallery").width());
+      $("#gallery").width($("#gallery").width());
+      return $(window).on("resize", function() {
+        return $("#gallery").width($("#gallery").width());
+      });
     }
   };
 
@@ -100,8 +107,12 @@
       var keycode;
       e = e || window.event;
       keycode = e.keyCode || e.which;
-      if (keycode === 37) mkGallery.next();
-      if (keycode === 39) return mkGallery.prev();
+      if (keycode === 37) {
+        mkGallery.next();
+      }
+      if (keycode === 39) {
+        return mkGallery.prev();
+      }
     };
   };
 
@@ -137,10 +148,16 @@
     stateObj = this.gallery.data("gallery")[this.index];
     titlePage = "";
     page = stateObj.template;
-    if (page !== "cappiello") titlePage = ": " + page;
+    if (page !== "cappiello") {
+      titlePage = ": " + page;
+    }
     title = "makevoid - portfolio" + titlePage;
-    if (page === "makevoid") page = "";
-    if (history.pushState) return history.pushState(stateObj, title, "/" + page);
+    if (page === "makevoid") {
+      page = "";
+    }
+    if (history.pushState) {
+      return history.pushState(stateObj, title, "/" + page);
+    }
   };
 
   mkGallery.manageState = function() {
@@ -161,10 +178,18 @@
   browsers.detect = function() {
     var chrome;
     chrome = navigator.userAgent.match(/Chrome/);
-    if ($.browser.mozilla) $("body").addClass("firefox");
-    if ($.browser.webkit) $("body").addClass("webkit");
-    if (chrome) $("body").addClass("chrome");
-    if ($.browser.webkit && !chrome) return $("body").addClass("safari");
+    if ($.browser.mozilla) {
+      $("body").addClass("firefox");
+    }
+    if ($.browser.webkit) {
+      $("body").addClass("webkit");
+    }
+    if (chrome) {
+      $("body").addClass("chrome");
+    }
+    if ($.browser.webkit && !chrome) {
+      return $("body").addClass("safari");
+    }
   };
 
 }).call(this);

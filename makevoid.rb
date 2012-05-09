@@ -11,19 +11,13 @@ class Makevoid < Sinatra::Base
   require "#{APP_PATH}/config/env"
 
   configure :development do
-    # register Sinatra::Reloader
-    # also_reload ["controllers/*.rb", "models/*.rb", "public/projects/*.haml"]
     set :public_folder, "public"
     set :static, true
   end
   set :logging, true
 
   set :haml, { :format => :html5 }
-  # require 'rack-flash'
   enable :sessions
-  # use Rack::Flash
-  require 'sinatra/content_for'
-  helpers Sinatra::ContentFor
   set :method_override, true
 
   def not_found(object=nil)
@@ -54,9 +48,13 @@ class Makevoid < Sinatra::Base
   def get_datas(page=nil)
     datas = [
       { name: "Accademia Cappiello",  template: "cappiello" },
+      { name: "Elisabetta Porcinai",  template: "eli" },
       { name: "RiotVan",              template: "riotvan" },
       { name: "makevoid",             template: "makevoid" },
-      { name: "Elisabetta Porcinai",  template: "eli" },
+
+      { name: "FiveTastic",           template: "fivetastic" },
+
+      { name: "Whoisy",               template: "whoisy" },
       { name: "Pietro Porcinai",      template: "pp" },
       #{ name: "my open source projects on github", template: "github_projects" },
       { name: "jScrape",              template: "jscrape" },
@@ -78,7 +76,7 @@ class Makevoid < Sinatra::Base
 
   get "/" do
     get_datas
-    @entry = @gallery_datas[2]
+    @entry = @gallery_datas.find{ |pag| pag[:template] == "makevoid" }
     haml :index
   end
 

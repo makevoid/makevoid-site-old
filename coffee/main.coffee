@@ -25,7 +25,7 @@ mkGallery.init = ->
   this.update_classes()
   this.manageState()
 
-mkGallery.index = 2
+mkGallery.index = 3
 mkGallery.gallery = $("#gallery")
 mkGallery.images = ->
   this.gallery.find("img")
@@ -64,7 +64,7 @@ mkGallery.prev = ->
 mkGallery.update_classes = ->
   _(this.images()).each (image, idx) =>
     $(image).removeClass()
-    img = (@index+2-idx+9) % this.size()
+    img = (@index+2-idx+this.size()) % this.size()
     $(image).addClass("image_#{img}")
     
 mkGallery.chrome_fix = ->

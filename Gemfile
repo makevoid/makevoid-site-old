@@ -4,8 +4,6 @@ gem 'haml'
 gem 'sass'
 gem 'sinatra'
 gem 'json'
-gem "sinatra-content-for"
-gem "sinatra-reloader"
 # gem 'rack-flash'
 #gem 'rack-static'
 # gem 'dm-core'
