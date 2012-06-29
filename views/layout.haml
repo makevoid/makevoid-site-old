@@ -6,8 +6,8 @@
     %meta{ charset: "utf-8" }
     %meta{ :"http-equiv" => "X-UA-Compatible", content: "IE=edge" }
     %meta{ name: "description", content: "Hello! I'm Francesco Canessa, a software developer specialized in web development. Contact me, I like software, open source and beer!" }
-    %meta{ name: "keywords", content: "makevoid, blog, ruby, rails, software development, web development, cocoa, iphone, software, programming" }    
-    %meta{ name: "author", content: "Francesco 'makevoid' Canessa" }    
+    %meta{ name: "keywords", content: "makevoid, blog, ruby, rails, software development, web development, cocoa, iphone, software, programming" }
+    %meta{ name: "author", content: "Francesco 'makevoid' Canessa" }
     %meta{ name: "google-site-verification", content:"1IuWAn47PLQ0AQpcJGeVQjqNMrfnnj-rFJOc7BawL3w" }
     -# %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0" }
     %link{ href: "/fonts/SwankyandMooMoo.ttf", type: "text/css" }
@@ -18,7 +18,7 @@
     %link{ rel: "openid2.local_id", href: "http://#{openid_user}.myopenid.com" }
     %link{ rel: "openid2.provider", href: "http://www.myopenid.com/server" }
     %meta{ :"http-equiv" => "X-XRDS-Location", content: "http://www.myopenid.com/xrds?username=#{openid_user}.myopenid.com" }
-    
+
     %meta{ property: "og:title", content: "makevoid - web apps and more! - portfolio" }
     %meta{ property: "og:url", content: "http://makevoid.com" }/
     %meta{ property: "og:type", content: "website" }/
@@ -26,10 +26,10 @@
     %meta{ property: "og:image", content: "http://makevoid.com/imgs/makevoid_fb.jpg" }/
     %meta{ property: "fb:admins", content: "makevoid" }/
     = haml :"_analytics"
-    
+
   %body
     #container
-      
+
       %ul#nav
         %li
           - link_to "Updates", "http://updates.makevoid.com"
@@ -37,17 +37,15 @@
           - link_to "Blog",  "http://updates.makevoid.com/m/blog"
         %li
           - link_to "vCard", "http://francescocanessa.com"
-  
+
       %header
         %h1
           %img{ src: "/imgs/makevoid.png", alt: "makevoid" }
-          
+
       #content
         = yield
       %footer
     %script{ src: "/js/jquery.js", type: "text/javascript" }
     %script{ src: "/js/underscore.js", type: "text/javascript" }
     %script{ src: "/js/haml.js", type: "text/javascript" }
-    %script{ src: "/js/gallery_helpers.js", type: "text/javascript" }
-    %script{ src: "/js/mkgallery.js", type: "text/javascript" }
     %script{ src: "/js/main.js", type: "text/javascript" }

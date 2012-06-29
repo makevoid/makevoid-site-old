@@ -8,6 +8,7 @@ mkGallery =
   gal_height: 0
   parse_helpers: true
   initialize: (h, element) ->
+    console.log "asd"
     @gal_height = h
     @image_width = 600
     @element = element
@@ -130,7 +131,7 @@ mkGallery =
     base_scale = 1
     first.transf center, 0, base_scale * 1,
       opacity: 1
-      
+
     moz = $.browser.mozilla
 
     first.addClass "mkCenter"
@@ -194,7 +195,7 @@ mkGallery =
       self.currentIndex = 0  if self.currentIndex >= self.gallery_data.length
       setTimeout self.set_z_indexes, 200
       self.size_and_position()
-      unless no_hook
+      unless false # no_hook
         self.postAnimationHook()
         self.activate_buttons()
         self.updateState()
@@ -238,6 +239,5 @@ $.fn.mkGallery = (height) ->
   $(window).bind "resize", ->
     mkGallery.size_and_position()
   this
-  
 
 g.mkGallery = mkGallery

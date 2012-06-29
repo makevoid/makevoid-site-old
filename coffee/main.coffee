@@ -2,7 +2,7 @@ g = window
 
 $ ->
   browsers.detect()
-  
+
   mkGallery.init()
   #gal = $("#gallery").mkGallery(450)
   $(".scroll_top").live "click", ->
@@ -10,8 +10,8 @@ $ ->
   #
   #$(".mkButtonGo").live "click", ->
   #  $("html, body").animate scrollTop: 600, 500
-  
-  
+
+
 mkGallery = {}
 g.mkGallery = mkGallery
 
@@ -48,32 +48,32 @@ mkGallery.attach_events = ->
       this.next()
     else if $(evt.target).hasClass("image_2") || $(evt.target).hasClass("image_3")
       this.prev()
-    
+
 mkGallery.next = ->
   @index = @index + 1
   @index = 0 if @index > this.size()-1
   this.update_classes()
   this.get_page()
-  
+
 mkGallery.prev = ->
   @index = @index - 1
   @index = this.size()-1 if @index < 0
   this.update_classes()
-  this.get_page()  
-    
+  this.get_page()
+
 mkGallery.update_classes = ->
   _(this.images()).each (image, idx) =>
     $(image).removeClass()
     img = (@index+2-idx+this.size()) % this.size()
     $(image).addClass("image_#{img}")
-    
+
 mkGallery.chrome_fix = ->
   if navigator.userAgent.match /Chrome/
     $("#gallery").width($("#gallery").width())
-    
+
     $(window).on "resize", ->
       $("#gallery").width($("#gallery").width())
-      
+
 
 mkGallery.keyboardEvents = ->
   document.onkeydown = (e) ->
@@ -82,7 +82,7 @@ mkGallery.keyboardEvents = ->
     if keycode is 37
       mkGallery.next()
     if keycode is 39
-      mkGallery.prev()  
+      mkGallery.prev()
 
 mkGallery.parseHelpers = (html) ->
   html = html.replace(/- link_to\s+['"](.+?)['"]\s*,\s+['"](.+?)['"]/g, " <a href='$2'>$1</a> ")  if typeof html is "string"
@@ -110,10 +110,11 @@ mkGallery.updateState = ->
   title = "makevoid - portfolio" + titlePage
   page = "" if page == "makevoid"
   history.pushState stateObj, title, "/" + page  if history.pushState
-  
+
 mkGallery.manageState = ->
   self = this
   window.onpopstate = (event) ->
+    console.log "asd"
     state = event.state
     unless state is `undefined`
       self.currentObject = state

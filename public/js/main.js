@@ -165,6 +165,7 @@
     self = this;
     return window.onpopstate = function(event) {
       var state;
+      console.log("asd");
       state = event.state;
       if (state !== undefined) {
         self.currentObject = state;

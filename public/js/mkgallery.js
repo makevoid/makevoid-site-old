@@ -10,6 +10,7 @@
     gal_height: 0,
     parse_helpers: true,
     initialize: function(h, element) {
+      console.log("asd");
       this.gal_height = h;
       this.image_width = 600;
       this.element = element;
@@ -36,7 +37,9 @@
       if (!navigator.userAgent.match(/Chrome/) && $.browser.webkit) {
         self = this;
         return $("#gallery").bind("click", function(evt) {
-          if ($(evt.target).attr("id") === "gallery") return self.next();
+          if ($(evt.target).attr("id") === "gallery") {
+            return self.next();
+          }
         });
       }
     },
@@ -58,7 +61,9 @@
         if (keycode === 39) {
           return mkGallery.next();
         } else {
-          if (keycode === 37) return mkGallery.prev();
+          if (keycode === 37) {
+            return mkGallery.prev();
+          }
         }
       };
     },
@@ -70,7 +75,9 @@
     },
     haml: function(body) {
       var main;
-      if (this.parse_helpers) body = this.parseHelpers(body);
+      if (this.parse_helpers) {
+        body = this.parseHelpers(body);
+      }
       main = Haml(body);
       return main({});
     },
@@ -137,7 +144,9 @@
             if (event.pageX > center + offset) {
               return mkGallery.next();
             } else {
-              if (event.pageX < center - offset) return mkGallery.prev();
+              if (event.pageX < center - offset) {
+                return mkGallery.prev();
+              }
             }
           }
         });
@@ -169,14 +178,18 @@
       moz = $.browser.mozilla;
       first.addClass("mkCenter");
       treshold = 200;
-      if (moz) treshold = 300;
+      if (moz) {
+        treshold = 300;
+      }
       width = 600;
       height = 400;
       center2 = $("body").width() / 2 - width / 2;
       y = this.gal_height / 2 - height / 2;
       x = center2 + treshold;
       mozx = 0;
-      if (moz) mozx = treshold * 2 / 1.5;
+      if (moz) {
+        mozx = treshold * 2 / 1.5;
+      }
       this.images[1].transf(x + mozx, y, base_scale * 0.6, {
         opacity: 0.8
       });
@@ -185,13 +198,17 @@
         opacity: 0.8
       });
       treshold = 300;
-      if (moz) treshold = 500;
+      if (moz) {
+        treshold = 500;
+      }
       width = 300;
       height = 200;
       y += 30;
       center2 = center2 + 50;
       x = center2 + treshold;
-      if (moz) mozx = treshold * 2 / 1.5;
+      if (moz) {
+        mozx = treshold * 2 / 1.5;
+      }
       this.images[2].css({
         display: "block"
       }).transf(x + mozx, y, base_scale * 0.4, {
@@ -239,10 +256,12 @@
         self.images = images.slice(1);
         self.images.push(images[0]);
         self.currentIndex++;
-        if (self.currentIndex >= self.gallery_data.length) self.currentIndex = 0;
+        if (self.currentIndex >= self.gallery_data.length) {
+          self.currentIndex = 0;
+        }
         setTimeout(self.set_z_indexes, 200);
         self.size_and_position();
-        if (!no_hook) {
+        if (!false) {
           self.postAnimationHook();
           self.activate_buttons();
           return self.updateState();
@@ -276,9 +295,13 @@
       stateObj = this.currentObject;
       titlePage = "";
       page = stateObj.template;
-      if (page !== "cappiello") titlePage = ": " + page;
+      if (page !== "cappiello") {
+        titlePage = ": " + page;
+      }
       title = "makevoid - portfolio" + titlePage;
-      if (history.pushState) return history.pushState(stateObj, title, "/" + page);
+      if (history.pushState) {
+        return history.pushState(stateObj, title, "/" + page);
+      }
     },
     manageState: function() {
       var self;

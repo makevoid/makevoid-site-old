@@ -46,12 +46,13 @@ class Makevoid < Sinatra::Base
 
   def get_datas(page=nil)
     datas = [
-      { name: "Accademia Cappiello",  template: "cappiello" },
       { name: "Elisabetta Porcinai",  template: "eli" },
+      { name: "Worked for",           template: "non_open" },
       { name: "RiotVan",              template: "riotvan" },
       { name: "makevoid",             template: "makevoid" },
 
       { name: "FiveTastic",           template: "fivetastic" },
+      { name: "Accademia Cappiello",  template: "cappiello" },
 
       { name: "Whoisy",               template: "whoisy" },
       { name: "Pietro Porcinai",      template: "pp" },
