@@ -2,11 +2,14 @@
 
 ### portfolio prototype (css3 animated gallery + content loading via ajax)
 
-### TODO:
+feel free to fork/reuse the project for your portfolios, the gallery is nice, isn't it?
 
-- find webkit (and moz) post transition hook
+### Projects to add:
+
+- sinforum
+- rankey
+
+
+### TODO: 
+  - find webkit (and moz) post transition hook
 https://github.com/benbarnett/jQuery-Animate-Enhanced
-
-dns telecom:
-212.216.112.112
-212.216.172.62
