@@ -97,15 +97,10 @@ class Makevoid < Sinatra::Base
     redirect "http://updates.makevoid.com/posts/#{splat}"
   end
 
-  get '/css/main.css' do
-    sass :main
-  end
-
   get "/*" do |page|
     get_datas(page)
     @entry = @gallery_datas.find{ |e| e[:template] == page }
     haml :index
   end
-
 
 end

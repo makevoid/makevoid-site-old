@@ -18,5 +18,8 @@ gem 'json'
 #gem "extlib"
 gem 'voidtools', git: "git://github.com/makevoid/voidtools"
 
-gem "guard"
-gem "guard-livereload"
+group :development do
+  gem "guard"
+  gem "guard-sass"
+  gem "guard-livereload"
+end
