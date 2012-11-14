@@ -172,7 +172,16 @@
     var _this = this;
     setTimeout(function() {
       return this.resizeHeightOnce();
+    }, 100);
+    setTimeout(function() {
+      return this.resizeHeightOnce();
     }, 400);
+    setTimeout(function() {
+      return this.resizeHeightOnce();
+    }, 1200);
+    setTimeout(function() {
+      return this.resizeHeightOnce();
+    }, 3000);
     return $(window).on("resize", function() {
       return _this.resizeHeightOnce();
     });
