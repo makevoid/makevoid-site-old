@@ -24,9 +24,9 @@
   mkGallery.init = function() {
     this.draw();
     this.attach_events();
-    this.chrome_fix();
     this.update_classes();
-    return this.manageState();
+    this.manageState();
+    return this.resizeHeight();
   };
 
   mkGallery.index = 3;
@@ -93,15 +93,6 @@
     });
   };
 
-  mkGallery.chrome_fix = function() {
-    if (navigator.userAgent.match(/Chrome/)) {
-      $("#gallery").width($("#gallery").width());
-      return $(window).on("resize", function() {
-        return $("#gallery").width($("#gallery").width());
-      });
-    }
-  };
-
   mkGallery.keyboardEvents = function() {
     return document.onkeydown = function(e) {
       var keycode;
@@ -165,13 +156,26 @@
     self = this;
     return window.onpopstate = function(event) {
       var state;
-      console.log("asd");
       state = event.state;
       if (state !== undefined) {
         self.currentObject = state;
         return self.get_page();
       }
     };
+  };
+
+  mkGallery.resizeHeightOnce = function() {
+    return this.gallery.height($(".image_2").height() + 30);
+  };
+
+  mkGallery.resizeHeight = function() {
+    var _this = this;
+    setTimeout(function() {
+      return this.resizeHeightOnce();
+    }, 400);
+    return $(window).on("resize", function() {
+      return _this.resizeHeightOnce();
+    });
   };
 
   browsers = {};

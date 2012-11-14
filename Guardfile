@@ -5,4 +5,4 @@ guard 'livereload' do
   watch(%r{public/css/.+\.(css)})
 end
 
-guard 'coffeescript', :input => 'public/js'
+guard 'coffeescript', input: 'coffee', output: 'public/js'

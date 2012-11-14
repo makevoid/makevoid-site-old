@@ -96,11 +96,10 @@ h4
   //overflow: hidden
   //padding-bottom: 20px
   height: 450px
-  margin: 0 auto
+  top: -100px
+  position: relative
   img
     position: absolute
-    width: 600px
-    height: 450px
     +transition(all 0.5s ease-in-out)
     opacity: 0.85
     z-index: 30
@@ -141,15 +140,17 @@ h4
     opacity: 0.7
 
 #content
-  -webkit-perspective: 1200px
+  //-webkit-perspective: 1900px
 
 
 #gallery
   $scale: 0.6
   $scale_min: 0.4
   img
+    -webkit-transform-origin: 50% 100%
     opacity: 0
     z-index: 1
+    width: 60%
   .image_1, .image_3
     opacity: 0.8
     z-index: 2
@@ -168,25 +169,25 @@ h4
     cursor: pointer
 
   .image_0
-    +transform(translate3d(-60%, 60px, 0) scale3d($scale_min, $scale_min, 1))
+    +transform(translate3d(-120%, 60px, 0) scale3d($scale_min, $scale_min, 1))
   .image_1
-    +transform(translate3d(-40%, 40px, 20px) scale3d($scale, $scale, 1))
+    +transform(translate3d(-90%, 70px, 20px) scale3d($scale, $scale, 1))
   .image_2
-    +transform(translate3d(0, 0, 30px))
+    +transform(translate3d(-50%, 120px, 30px))
   .image_3
-    +transform(translate3d(40%, 40px, 20px) scale3d($scale, $scale, 1))
+    +transform(translate3d(-10%, 70px, 20px) scale3d($scale, $scale, 1))
   .image_4
-    +transform(translate3d(60%, 60px, 0) scale3d($scale_min, $scale_min, 1))
+    +transform(translate3d(20%, 60px, 0) scale3d($scale_min, $scale_min, 1))
 
 
 .safari #gallery
 
-  width: 600px
+  //width: 600px
 
 
-.firefox #gallery
-  position: relative
-  left: -25%
+.firefox #gallery img
+  +box-shadow(0, 0, 0, #000)
+  //left: -25%
 
 //...i found that to fix it you have to apply the filter before rounding the border... this way it works... no words...
 
@@ -213,10 +214,6 @@ ul#nav
 
 #gallery
   margin-bottom: 25px
-  // -webkit-transform-origin: 10px 10px
-  // -webkit-transform: rotateY(5deg) rotateX(10deg)
-
-
 
 #infos
   ul.features, ul.technologies

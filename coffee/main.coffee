@@ -4,13 +4,9 @@ $ ->
   browsers.detect()
 
   mkGallery.init()
-  #gal = $("#gallery").mkGallery(450)
+
   $(".scroll_top").live "click", ->
     $("html, body").animate scrollTop: 0, 500
-  #
-  #$(".mkButtonGo").live "click", ->
-  #  $("html, body").animate scrollTop: 600, 500
-
 
 mkGallery = {}
 g.mkGallery = mkGallery
@@ -21,9 +17,9 @@ mkGallery.image_template = (img) ->
 mkGallery.init = ->
   this.draw()
   this.attach_events()
-  this.chrome_fix()
   this.update_classes()
   this.manageState()
+  this.resizeHeight()
 
 mkGallery.index = 3
 mkGallery.gallery = $("#gallery")
@@ -67,13 +63,6 @@ mkGallery.update_classes = ->
     img = (@index+2-idx+this.size()) % this.size()
     $(image).addClass("image_#{img}")
 
-mkGallery.chrome_fix = ->
-  if navigator.userAgent.match /Chrome/
-    $("#gallery").width($("#gallery").width())
-
-    $(window).on "resize", ->
-      $("#gallery").width($("#gallery").width())
-
 
 mkGallery.keyboardEvents = ->
   document.onkeydown = (e) ->
@@ -114,11 +103,20 @@ mkGallery.updateState = ->
 mkGallery.manageState = ->
   self = this
   window.onpopstate = (event) ->
-    console.log "asd"
     state = event.state
     unless state is `undefined`
       self.currentObject = state
       self.get_page()
+
+mkGallery.resizeHeightOnce = ->
+  this.gallery.height $(".image_2").height()+30
+
+mkGallery.resizeHeight = ->
+  setTimeout ->
+    this.resizeHeightOnce()
+  , 400
+  $(window).on "resize", =>
+    this.resizeHeightOnce()
 
 browsers = {}
 browsers.detect = ->
