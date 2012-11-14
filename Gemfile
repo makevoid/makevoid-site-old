@@ -22,4 +22,5 @@ group :development do
   gem "guard"
   gem "guard-sass"
   gem "guard-livereload"
+  gem "guard-coffeescript"
 end
