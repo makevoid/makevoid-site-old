@@ -170,7 +170,10 @@
 
   mkGallery.resizeHeight = function() {
     var _this = this;
-    return $("img").imagesLoaded(function() {
+    $("img").imagesLoaded(function() {
+      return _this.resizeHeightOnce();
+    });
+    return $(window).on("resize", function() {
       return _this.resizeHeightOnce();
     });
   };

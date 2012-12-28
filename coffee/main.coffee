@@ -112,8 +112,9 @@ mkGallery.resizeHeightOnce = ->
   this.gallery.height $(".image_2").height()+30
 
 mkGallery.resizeHeight = ->
-  # fixme with jquery imageloaded
   $("img").imagesLoaded =>
+    this.resizeHeightOnce()
+  $(window).on "resize", =>
     this.resizeHeightOnce()
 
 browsers = {}
