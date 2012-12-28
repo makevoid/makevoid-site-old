@@ -113,19 +113,7 @@ mkGallery.resizeHeightOnce = ->
 
 mkGallery.resizeHeight = ->
   # fixme with jquery imageloaded
-  setTimeout ->
-    this.resizeHeightOnce()
-  , 100
-  setTimeout ->
-    this.resizeHeightOnce()
-  , 400
-  setTimeout ->
-    this.resizeHeightOnce()
-  , 1200
-  setTimeout ->
-    this.resizeHeightOnce()
-  , 3000
-  $(window).on "resize", =>
+  $("img").imagesLoaded =>
     this.resizeHeightOnce()
 
 browsers = {}
