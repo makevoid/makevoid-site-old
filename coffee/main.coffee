@@ -120,7 +120,10 @@ mkGallery.resizeHeight = ->
 browsers = {}
 browsers.detect = ->
   chrome = navigator.userAgent.match /Chrome/
+  ios = navigator.userAgent.match /iphone|ipod|ipad/i
   $("body").addClass "firefox" if $.browser.mozilla
   $("body").addClass "webkit" if $.browser.webkit
   $("body").addClass "chrome" if chrome
   $("body").addClass "safari" if $.browser.webkit && !chrome
+  $("body").addClass "ios"    if ios
+
