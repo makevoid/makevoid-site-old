@@ -254,6 +254,10 @@ h4 {
   #gallery .mkButtonGo.active:hover {
     opacity: 0.7; }
 
+.safari #gallery {
+  position: relative;
+  left: 50%; }
+
 #gallery img {
   -webkit-transform-origin: 50% 100%;
   opacity: 0;
