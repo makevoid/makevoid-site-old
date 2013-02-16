@@ -181,8 +181,9 @@
   browsers = {};
 
   browsers.detect = function() {
-    var chrome;
+    var chrome, ios;
     chrome = navigator.userAgent.match(/Chrome/);
+    ios = navigator.userAgent.match(/iphone|ipod|ipad/i);
     if ($.browser.mozilla) {
       $("body").addClass("firefox");
     }
@@ -193,7 +194,10 @@
       $("body").addClass("chrome");
     }
     if ($.browser.webkit && !chrome) {
-      return $("body").addClass("safari");
+      $("body").addClass("safari");
+    }
+    if (ios) {
+      return $("body").addClass("ios");
     }
   };
 

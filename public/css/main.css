@@ -40,7 +40,7 @@ body {
   background: #055081;
   font-family: sans-serif, Helvetica, Arial, Verdana;
   color: #eeeeee;
-  font-size: 120%;
+  font-size: 100%;
   text-align: center; }
 
 a {
@@ -128,12 +128,16 @@ p {
   font-size: 0.9em; }
 
 h1 {
+  max-width: 500px;
+  width: 30%;
+  min-width: 200px;
   margin: 0 auto 10px auto;
-  width: 500px;
   font-size: 2em; }
   h1 span {
     font-size: 0.55em;
     display: block; }
+  h1 img {
+    width: 100%; }
 
 .portfolio {
   padding-bottom: 0px; }
@@ -144,7 +148,7 @@ h2 {
 
 h3 {
   margin: 20px 0 25px;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: bold; }
 
 h4 {
@@ -255,6 +259,10 @@ h4 {
     opacity: 0.35; }
   #gallery .mkButtonGo.active:hover {
     opacity: 0.7; }
+
+.safari #gallery {
+  position: relative;
+  left: 50%; }
 
 #gallery img {
   -webkit-transform-origin: 50% 100%;
