@@ -81,7 +81,7 @@ h1
   padding-bottom: 0px
 
 h2
-  margin-bottom: 45px
+  margin: 0 0 12px 0
   font-size: 1.4em
 
 h3
@@ -98,6 +98,8 @@ h4
   height: 450px
   top: -100px
   position: relative
+  max-width: 950px
+  margin: 0 auto
   img
     position: absolute
     +transition(all 0.5s ease-in-out)
@@ -192,10 +194,12 @@ h4
 //...i found that to fix it you have to apply the filter before rounding the border... this way it works... no words...
 
 ul#nav
-  float: right
   display: block
   width: 270px
   margin-bottom: 10px
+  position: absolute
+  z-index: 100
+  right: 0
   li a
     +button
     +gradient($bg, $bg_dark)

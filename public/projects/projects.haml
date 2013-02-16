@@ -1,0 +1,18 @@
+%p.info others open source projects
+
+
+%ul
+  - for project in PROJECTS
+    %li
+      - link_to project[:label], "https://github.com/makevoid/#{project[:name]}"
+
+  %li
+    - link_to "Mhash", "https://github.com/makevoid/wanderer/blob/master/lib/mhash.rb"
+
+-# not for display:
+
+-# unfinished:
+-#   https://github.com/makevoid/mkvping
+-#   fivetastic-mac
+
+-# outdated: { label: "Volatutto", name: "volatutto", desc: "flights low fares finder - caches and redirect to volaGratis.it" },

@@ -139,7 +139,7 @@ h1 {
   padding-bottom: 0px; }
 
 h2 {
-  margin-bottom: 45px;
+  margin: 0 0 12px 0;
   font-size: 1.4em; }
 
 h3 {
@@ -153,7 +153,9 @@ h4 {
 #gallery {
   height: 450px;
   top: -100px;
-  position: relative; }
+  position: relative;
+  max-width: 950px;
+  margin: 0 auto; }
   #gallery img {
     position: absolute;
     -webkit-transition: all 0.5s ease-in-out;
@@ -421,10 +423,12 @@ h4 {
   box-shadow: 0 0 0 black; }
 
 ul#nav {
-  float: right;
   display: block;
   width: 270px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  position: absolute;
+  z-index: 100;
+  right: 0; }
   ul#nav li a {
     display: inline-block;
     padding: 0.08em 0.7em 0.1em;

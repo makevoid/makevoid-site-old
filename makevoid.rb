@@ -6,6 +6,10 @@ require 'json'
 path = File.expand_path "../", __FILE__
 APP_PATH = path
 
+projects = File.read "./config/projects_data.rb"
+projects = eval projects
+PROJECTS = projects
+
 class Makevoid < Sinatra::Base
   require "#{APP_PATH}/config/env"
 
@@ -46,21 +50,23 @@ class Makevoid < Sinatra::Base
 
   def get_datas(page=nil)
     datas = [
-      { name: "Elisabetta Porcinai",  template: "eli" },
+      { name: "Elisabetta Porcinai",  template: "eli",        url: "elisabettaporcinai.com" },
       { name: "Worked for",           template: "non_open" },
-      { name: "RiotVan",              template: "riotvan" },
-      { name: "makevoid",             template: "makevoid" },
+      { name: "RiotVan",              template: "riotvan",    url: "riotvan.net" },
+      { name: "makevoid",             template: "makevoid",   url: "makevoid.com" },
 
-      { name: "FiveTastic",           template: "fivetastic" },
-      { name: "Accademia Cappiello",  template: "cappiello" },
+      { name: "FiveTastic",           template: "fivetastic", url: "fivetastic.org" },
+      { name: "Accademia Cappiello",  template: "cappiello",  url: "en.accademia-cappiello.it" },
 
-      { name: "Whoisy",               template: "whoisy" },
-      { name: "Pietro Porcinai",      template: "pp" },
+      { name: "Other projects",       template: "projects",     url: "github.com/makevoid" },
+      { name: "Marco Mazzi",          template: "marco",     url: "whoisy.net" },
+      { name: "Whoisy",               template: "whoisy",     url: "whoisy.net" },
+      { name: "Pietro Porcinai",      template: "pp",         url: "pietroporcinai.net" },
       #{ name: "my open source projects on github", template: "github_projects" },
-      { name: "jScrape",              template: "jscrape" },
-      { name: "Thorrents",            template: "thorrents" },
-      { name: "MangaPad",             template: "mangapad" },
-      { name: "SkiCams",              template: "skicams" },
+      { name: "jScrape",              template: "jscrape",    url: "jscrape.it" },
+      { name: "Thorrents",            template: "thorrents",  url: "thorrents.com" },
+      { name: "MangaPad",             template: "mangapad",   url: "mangapad.org" },
+      { name: "SkiCams",              template: "skicams",    url: "skicams.it" },
       #{ name: "StyleQuiz", template: "stylequiz" },
     ]
     datas.each do |data|
