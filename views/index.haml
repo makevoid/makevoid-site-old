@@ -1,25 +1,21 @@
 %section.portfolio
   %h3 portfolio
-  
+
   %div#gallery{ :"data-gallery" => @gallery_json }
     .mkButtonGo
       %p more infos
       %div.arrow v
-  
+
 #title
   %h2= @entry[:name]
-  
+
 #infos
   = haml :"../public/projects/#{@entry[:template]}"
 .clear
 
-  
-%a.button.scroll_top{ href: js_void } 
+
+%a.button.scroll_top{ href: js_void }
   %div ^
 
-
-
-
-
-  
 -# Advertising has us chasing cars and clothes, working jobs we hate so we can buy shit we don't need. We're the middle children of history, man. No purpose or place. We have no Great War. No Great Depression. Our great war is a spiritual war. Our great depression is our lives. We've all been raised on television to believe that one day we'd all be millionaires, and movie gods, and rock stars, but we won't. We're slowly learning that fact. And we're very, very pissed off.
+-# fight club

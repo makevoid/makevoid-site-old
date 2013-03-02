@@ -16,11 +16,13 @@ gem 'json'
 # gem 'dm-mysql-adapter'
 
 #gem "extlib"
-gem 'voidtools', git: "git://github.com/makevoid/voidtools"
+gem 'voidtools', git: "git@github.com:makevoid/voidtools"
 
 group :development do
   gem "guard"
   gem "guard-sass"
   gem "guard-livereload"
   gem "guard-coffeescript"
+  gem "foreman"
+  gem "rerun"
 end
