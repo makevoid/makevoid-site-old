@@ -122,12 +122,13 @@
   };
 
   mkGallery.get_page = function() {
-    var object, self;
+    var format, object, self;
     self = this;
     object = this.gallery.data("gallery")[this.index];
-    return $.get("/projects/" + object.template + ".haml", function(page) {
+    format = object.format || "haml";
+    return $.get("/projects/" + object.template + ("." + format), function(page) {
       var html;
-      html = self.haml(page);
+      html = format === "haml" ? self.haml(page) : page;
       $("#infos").html(html);
       $("h2").html(object.name);
       return self.updateState();

@@ -58,11 +58,11 @@ class Makevoid < Sinatra::Base
       { name: "FiveTastic",           template: "fivetastic", url: "fivetastic.org" },
       { name: "Accademia Cappiello",  template: "cappiello",  url: "en.accademia-cappiello.it" },
 
-      { name: "Other projects",       template: "projects",     url: "github.com/makevoid" },
-      { name: "Marco Mazzi",          template: "marco",     url: "whoisy.net" },
+      { name: "Other projects",       template: "open",       url: "github.com/makevoid", format: "html" },
+      { name: "Marco Mazzi",          template: "marco",      url: "whoisy.net" },
       { name: "Whoisy",               template: "whoisy",     url: "whoisy.net" },
       { name: "Pietro Porcinai",      template: "pp",         url: "pietroporcinai.net" },
-      #{ name: "my open source projects on github", template: "github_projects" },
+
       { name: "jScrape",              template: "jscrape",    url: "jscrape.it" },
       { name: "Thorrents",            template: "thorrents",  url: "thorrents.com" },
       { name: "MangaPad",             template: "mangapad",   url: "mangapad.org" },
@@ -101,6 +101,10 @@ class Makevoid < Sinatra::Base
   get "/posts/*" do |splat|
     splat = splat.gsub(/ /, '+')
     redirect "http://updates.makevoid.com/posts/#{splat}"
+  end
+
+  get "/projects/open.html" do
+    haml :"../public/projects/open", layout: false
   end
 
   get "/*" do |page|

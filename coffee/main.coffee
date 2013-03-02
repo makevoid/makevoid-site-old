@@ -85,8 +85,12 @@ mkGallery.haml = (body) ->
 mkGallery.get_page = ->
   self = this
   object = this.gallery.data("gallery")[@index]
-  $.get "/projects/" + object.template + ".haml", (page) ->
-    html = self.haml(page)
+  format = object.format || "haml"
+  $.get "/projects/" + object.template + ".#{format}", (page) ->
+    html = if format == "haml"
+      self.haml(page)
+    else
+      page
     $("#infos").html html
     $("h2").html object.name
     self.updateState()

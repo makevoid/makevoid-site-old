@@ -1,13 +1,10 @@
 %p.info others open source projects
 
-
-%ul
+%ul.opensource
   - for project in PROJECTS
     %li
       - link_to project[:label], "https://github.com/makevoid/#{project[:name]}"
-
-  %li
-    - link_to "Mhash", "https://github.com/makevoid/wanderer/blob/master/lib/mhash.rb"
+      = project[:desc]
 
 -# not for display:
 

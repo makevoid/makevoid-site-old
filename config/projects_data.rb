@@ -27,5 +27,7 @@
   { label: "Phy", name: "phy", desc: "simple sinatra+python app to control a Phidgets relay" },
   { label: "EYBalancer", name: "ey_balancer", desc: "EyBalancer allows you to add and remove instances to/from your EngineYard AppCloud cluster programmatically." },
   { label: "RedisMapper", name: "redismapper", desc: "Basic ORM for Redis key/value store" },
-  { label: "phidgets", name: "phidgets", desc: "Phidgets + Ruby + Fun (example code)" }
+  { label: "phidgets", name: "phidgets", desc: "Phidgets + Ruby + Fun (example code)" },
+  { label: "Mhash", name: "https://github.com/makevoid/wanderer/blob/master/lib/mhash.rb", desc: "Ruby Hash with methods!"
+  }
 ]
