@@ -7,8 +7,7 @@
   { label: "Mobilize", name: "mobilize", desc: "basic building blocks for a mini-framework to develop mobile web apps (experiment)", langs: %w(js coffee sass haml) },
   { label: "HostGist", name: "hostgist", desc: "Host Gists easily! Render them like GitHub Pages!", langs: %w(ruby sinatra) },
   { label: "SlimHaml example (PHP)", name: "slim_haml", desc: "simple example using Slim with MtHaml" },
-  { label: "mkvStack", name: "mkvstack", desc: "script to setup a new rails 3 application" },
-  { label: "loadbal", name: "loadbal", desc: "sets / unsets load balancing policy on TP-Link router [mechanize]" },
+
   { label: "headshot", name: "headshot", desc: "Takes a page screenshot, manipulates it and shows it via js" },
   { label: "jQueryFlickr", name: "jqueryflickr", desc: "get flickr photos by photoset and outputs fancybox gallery" },
   { label: "FBComments", name: "fbcomments", desc: "get Facebook comments counts from Wordpress posts" },
@@ -29,5 +28,7 @@
   { label: "RedisMapper", name: "redismapper", desc: "Basic ORM for Redis key/value store" },
   { label: "phidgets", name: "phidgets", desc: "Phidgets + Ruby + Fun (example code)" },
   { label: "Mhash", name: "https://github.com/makevoid/wanderer/blob/master/lib/mhash.rb", desc: "Ruby Hash with methods!"
-  }
+  },
+  { label: "mkvStack", name: "mkvstack", desc: "script to setup a new rails 3 application" },
+  { label: "loadbal", name: "loadbal", desc: "sets / unsets load balancing policy on TP-Link router [mechanize]" },
 ]
