@@ -7,7 +7,8 @@
       %div.arrow v
 
 #title
-  %h2= @entry[:name]
+  %h2
+    - link_to @entry[:name], "http://#{@entry[:url]}"
 
 #infos
   = haml :"../public/projects/#{@entry[:template]}"

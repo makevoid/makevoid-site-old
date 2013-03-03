@@ -134,10 +134,11 @@
     object = this.gallery.data("gallery")[this.index];
     format = object.format || "haml";
     return $.get("/projects/" + object.template + ("." + format), function(page) {
-      var html;
+      var html, link;
       html = format === "haml" ? self.haml(page) : page;
       $("#infos").html(html);
-      $("h2").html(object.name);
+      link = "<a href='http://" + object.url + "'>" + object.name + "</a>";
+      $("h2").html(link);
       return self.updateState();
     });
   };

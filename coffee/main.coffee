@@ -100,7 +100,8 @@ mkGallery.get_page = ->
     else
       page
     $("#infos").html html
-    $("h2").html object.name
+    link = "<a href='http://#{object.url}'>#{object.name}</a>"
+    $("h2").html link
     self.updateState()
 
 mkGallery.updateState = ->
