@@ -82,8 +82,16 @@ mkGallery.haml = (body) ->
   main = Haml(body)
   main {}
 
+first_time = true
+
 mkGallery.get_page = ->
   self = this
+
+  if first_time && location.pathname != "/"
+    @index = @index-1
+    this.update_classes()
+  first_time = false
+
   object = this.gallery.data("gallery")[@index]
   format = object.format || "haml"
   $.get "/projects/" + object.template + ".#{format}", (page) ->

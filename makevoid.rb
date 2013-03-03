@@ -50,23 +50,24 @@ class Makevoid < Sinatra::Base
 
   def get_datas(page=nil)
     datas = [
-      { name: "Elisabetta Porcinai",  template: "eli",        url: "elisabettaporcinai.com" },
+      { name: "SkiCams",              template: "skicams",    url: "skicams.it" },
       { name: "Worked for",           template: "non_open" },
+      { name: "Other projects",       template: "open",       url: "github.com/makevoid", format: "html" },
+      { name: "makevoid",             template: "makevoid",   url: "makevoid.com" }, # first page
+
+      { name: "Thorrents",            template: "thorrents",  url: "thorrents.com" },
       { name: "RiotVan",              template: "riotvan",    url: "riotvan.net" },
-      { name: "makevoid",             template: "makevoid",   url: "makevoid.com" },
 
       { name: "FiveTastic",           template: "fivetastic", url: "fivetastic.org" },
       { name: "Accademia Cappiello",  template: "cappiello",  url: "en.accademia-cappiello.it" },
-
-      { name: "Other projects",       template: "open",       url: "github.com/makevoid", format: "html" },
       { name: "Marco Mazzi",          template: "marco",      url: "whoisy.net" },
       { name: "Whoisy",               template: "whoisy",     url: "whoisy.net" },
       { name: "Pietro Porcinai",      template: "pp",         url: "pietroporcinai.net" },
 
       { name: "jScrape",              template: "jscrape",    url: "jscrape.it" },
-      { name: "Thorrents",            template: "thorrents",  url: "thorrents.com" },
-      { name: "MangaPad",             template: "mangapad",   url: "mangapad.org" },
-      { name: "SkiCams",              template: "skicams",    url: "skicams.it" },
+      # { name: "MangaPad",             template: "mangapad",   url: "mangapad.org" },
+      { name: "Elisabetta Porcinai",  template: "eli",        url: "elisabettaporcinai.com" },
+
       #{ name: "StyleQuiz", template: "stylequiz" },
     ]
     datas.each do |data|

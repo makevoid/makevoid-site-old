@@ -1,5 +1,5 @@
 (function() {
-  var browsers, g, mkGallery;
+  var browsers, first_time, g, mkGallery;
 
   g = window;
 
@@ -121,9 +121,16 @@
     return main({});
   };
 
+  first_time = true;
+
   mkGallery.get_page = function() {
     var format, object, self;
     self = this;
+    if (first_time && location.pathname !== "/") {
+      this.index = this.index - 1;
+      this.update_classes();
+    }
+    first_time = false;
     object = this.gallery.data("gallery")[this.index];
     format = object.format || "haml";
     return $.get("/projects/" + object.template + ("." + format), function(page) {
