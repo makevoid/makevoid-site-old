@@ -28,14 +28,6 @@ li {
 a {
   text-decoration: none; }
 
-@font-face {
-  font-family: Guardian;
-  src: url(/fonts/guardian.eot); }
-
-@font-face {
-  font-family: Guardian;
-  src: url("/fonts/guardian.otf"); }
-
 body {
   background: #055081;
   font-family: sans-serif, Helvetica, Arial, Verdana;
@@ -96,7 +88,7 @@ input[type='submit'], input.submit, a.button, a.btn {
     background: -moz-linear-gradient(top, #8dc2f7, #bddbfa);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8dc2f7', endColorstr='#bddbfa');
     color: #dcecfc; }
-  input[type='submit'] hover, input.submit hover, a.button hover, a.btn hover {
+  input[type='submit']:hover, input.submit:hover, a.button:hover, a.btn:hover {
     border: solid 1px #5ca8e7;
     background-color: #69afe9;
     background: -webkit-gradient(linear, left top, left bottom, from(#a3cef1), to(#69afe9));
@@ -104,12 +96,12 @@ input[type='submit'], input.submit, a.button, a.btn {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a3cef1', endColorstr='#69afe9');
     color: #f0f7fc;
     color: #093e97; }
-    input[type='submit'] hover:hover, input.submit hover:hover, a.button hover:hover, a.btn hover:hover {
+    input[type='submit']:hover:hover, input.submit:hover:hover, a.button:hover:hover, a.btn:hover:hover {
       background-color: #53a3e6;
       background: -webkit-gradient(linear, left top, left bottom, from(#95c7f0), to(#53a3e6));
       background: -moz-linear-gradient(top, #95c7f0, #53a3e6);
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#95c7f0', endColorstr='#53a3e6'); }
-    input[type='submit'] hover:active, input.submit hover:active, a.button hover:active, a.btn hover:active {
+    input[type='submit']:hover:active, input.submit:hover:active, a.button:hover:active, a.btn:hover:active {
       background-color: #95c7f0;
       background: -webkit-gradient(linear, left top, left bottom, from(#69afe9), to(#95c7f0));
       background: -moz-linear-gradient(top, #69afe9, #95c7f0);

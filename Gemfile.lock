@@ -51,6 +51,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.4.0)
       rack
+    rb-fsevent (0.9.3)
     rerun (0.8.0)
       listen
     sass (3.2.6)
@@ -74,6 +75,7 @@ DEPENDENCIES
   guard-sass
   haml
   json
+  rb-fsevent (~> 0.9)
   rerun
   sass
   sinatra

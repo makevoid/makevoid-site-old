@@ -25,4 +25,5 @@ group :development do
   gem "guard-coffeescript"
   gem "foreman"
   gem "rerun"
+  gem 'rb-fsevent', '~> 0.9'
 end
