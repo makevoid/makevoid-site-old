@@ -52,7 +52,7 @@ class Makevoid < Sinatra::Base
     datas = [
       { name: "SkiCams",              template: "skicams",    url: "skicams.it" },
       { name: "Worked for",           template: "non_open" },
-      { name: "Other projects",       template: "open",       url: "github.com/makevoid", format: "html" },
+      { name: "Other projects",       template: "open",       url: "github.com/makevoid?tab=repositories", format: "html" },
       { name: "makevoid",             template: "makevoid",   url: "makevoid.com" }, # first page
 
       { name: "Thorrents",            template: "thorrents",  url: "thorrents.com" },
