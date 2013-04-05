@@ -477,13 +477,16 @@ ul#nav {
 #gallery {
   margin-bottom: 25px; }
 
-#infos ul.features li, #infos ul.technologies li {
-  margin: 15px 0;
-  font-size: 1.1em;
-  display: block; }
-  #infos ul.features li p, #infos ul.technologies li p {
-    margin-top: 4px;
-    font-size: 0.85em; }
+#infos {
+  width: 85%;
+  margin: 0 auto; }
+  #infos ul.features li, #infos ul.technologies li {
+    margin: 15px 0;
+    font-size: 1.1em;
+    display: block; }
+    #infos ul.features li p, #infos ul.technologies li p {
+      margin-top: 4px;
+      font-size: 0.85em; }
 
 a.scroll_top {
   margin: 35px 0 30px;
