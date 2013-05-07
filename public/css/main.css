@@ -426,9 +426,10 @@ ul#nav {
   display: block;
   width: 270px;
   margin-bottom: 10px;
-  position: absolute;
+  top: -15px;
+  position: relative;
   z-index: 100;
-  right: 0; }
+  float: right; }
   ul#nav li a {
     display: inline-block;
     padding: 0.08em 0.7em 0.1em;
