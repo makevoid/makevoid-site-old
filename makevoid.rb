@@ -109,6 +109,10 @@ class Makevoid < Sinatra::Base
     haml :"../public/projects/open", layout: false
   end
 
+  get "/donate" do
+    redirect "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2KSEKU762FE8Q"
+  end
+
   get "/*" do |page|
     get_datas(page)
     @entry = @gallery_datas.find{ |e| e[:template] == page }
