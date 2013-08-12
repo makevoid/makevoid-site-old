@@ -1,5 +1,5 @@
 [
-# https://github.com/makevoid/guard-concat
+  { label: "Guard plugin: Concat",  name: "guard-concat", desc: "Concatenates your assets automatically on save, lower your requests!" },
   { label: "SAF",     name: "saf", desc: "Why use complex formats for simple things? Simple Articles Format!" },
   { label: "S3Play",  name: "s3play", desc: "Play songs from an S3 Bucket"  },
   { label: "ServTools", name: "servtools", desc: "ruby scripts for managing app servers - setup, utils and more", langs: %w(ruby bash) },
