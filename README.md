@@ -1,13 +1,16 @@
-# mkvd.net
+# makevoid.com
 
-### portfolio prototype (css3 animated gallery + content loading via ajax)
+### portfolio  (css3 animated gallery + content loading via ajax)
 
 feel free to fork/reuse the project for your portfolios, the gallery is nice, isn't it?
+
+
 
 ### Projects to add:
 
 - sinforum
 - rankey
+- many others
 
 
 ### TODO: 
