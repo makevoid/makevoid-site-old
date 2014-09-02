@@ -54,11 +54,12 @@ class Makevoid < Sinatra::Base
       { name: "Worked for",           template: "non_open" },
       { name: "Other projects",       template: "open",       url: "github.com/makevoid?tab=repositories", format: "html" },
       { name: "makevoid",             template: "makevoid",   url: "makevoid.com" }, # first page
+      { name: "SkiCams",              template: "skicams",    url: "skicams.it" },
 
-      { name: "Thorrents",            template: "thorrents",  url: "thorrents.com" },
-      { name: "RiotVan",              template: "riotvan",    url: "riotvan.net" },
+      #{ name: "Thorrents",            template: "thorrents",  url: "thorrents.com" },
+      #{ name: "RiotVan",              template: "riotvan",    url: "riotvan.net" },
 
-      { name: "FiveTastic",           template: "fivetastic", url: "fivetastic.org" },
+      #{ name: "FiveTastic",           template: "fivetastic", url: "fivetastic.org" },
       { name: "Accademia Cappiello",  template: "cappiello",  url: "en.accademia-cappiello.it" },
       { name: "Marco Mazzi",          template: "marco",      url: "whoisy.net" },
       { name: "Whoisy",               template: "whoisy",     url: "whoisy.net" },
@@ -67,7 +68,6 @@ class Makevoid < Sinatra::Base
       { name: "jScrape",              template: "jscrape",    url: "jscrape.it" },
       # { name: "MangaPad",             template: "mangapad",   url: "mangapad.org" },
       { name: "Elisabetta Porcinai",  template: "eli",        url: "elisabettaporcinai.com" },
-      { name: "SkiCams",              template: "skicams",    url: "skicams.it" },
 
       #{ name: "StyleQuiz", template: "stylequiz" },
     ]
